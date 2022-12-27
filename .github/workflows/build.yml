@@ -91,7 +91,7 @@ jobs:
               /system/bin/sleep 2m
               /system/bin/uiautomator dump /data/local/tmp/ui.xml
               cat /data/local/tmp/ui.xml | /system/bin/grep -oP \'ll_home_home.+?(?=]")\'' # | grep -oP \'(?<="\[).+$\' | sed s/[][,]/\ /g'
-              #$ANDROID_HOME/platform-tools/adb -s emulator-5554 pull /data/local/tmp/uidump.xml uidump.xml
+              #$ANDROID_HOME/platform-tools/adb -s emulator-5554 pull /data/local/tmp/ui.xml ui.xml
               #$ANDROID_HOME/platform-tools/adb -s emulator-5554 pull /data/local/tmp/haha.mp4 haha.mp4
         #- uses: actions/upload-artifact@main
         #  with:
