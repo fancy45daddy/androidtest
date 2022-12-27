@@ -77,22 +77,12 @@ jobs:
               $ANDROID_HOME/platform-tools/adb remount
               $ANDROID_HOME/platform-tools/adb devices -l
               $ANDROID_HOME/platform-tools/adb install cashzine.apk
-              curl https://packages.termux.dev/apt/termux-main/pool/main/p/pcre2grep/pcre2grep_10.40_x86_64.deb > pcre2grep.deb
-              curl https://packages.termux.dev/apt/termux-main/pool/main/p/pcre2/pcre2_10.40_x86_64.deb > pcre2.deb
-              dpkg --fsys-tarfile pcre2grep.deb | tar -xf - ./data/data/com.termux/files/usr/bin/pcre2grep
-              dpkg --fsys-tarfile pcre2.deb | tar -xf - ./data/data/com.termux/files/usr/lib/libpcre2-8.so
-              $ANDROID_HOME/platform-tools/adb push data/data/com.termux/files/usr/bin/pcre2grep /system/bin/pcre2grep
-              $ANDROID_HOME/platform-tools/adb push data/data/com.termux/files/usr/lib/libpcre2-8.so /system/lib/libpcre2-8.so
-              rm -rf *.deb data
               $ANDROID_HOME/platform-tools/adb shell $'/system/bin/am start -n com.sky.sea.cashzine/com.sky.sea.home.main.MainActivity
-              ls -al /system/bin
-              ls -al /system/lib
-              /system/bin/grep --help
               /system/bin/sleep 2m
               /system/bin/uiautomator dump /data/local/tmp/ui.xml
               cat /data/local/tmp/ui.xml | /system/bin/grep -oP \'ll_home_home.+?(?=]")\'' # | grep -oP \'(?<="\[).+$\' | sed s/[][,]/\ /g'
-              #$ANDROID_HOME/platform-tools/adb -s emulator-5554 pull /data/local/tmp/ui.xml ui.xml
-              #$ANDROID_HOME/platform-tools/adb -s emulator-5554 pull /data/local/tmp/haha.mp4 haha.mp4
+              #$ANDROID_HOME/platform-tools/adb pull /data/local/tmp/ui.xml ui.xml
+              #$ANDROID_HOME/platform-tools/adb pull /data/local/tmp/haha.mp4 haha.mp4
         #- uses: actions/upload-artifact@main
         #  with:
         #      path: uidump.xml
