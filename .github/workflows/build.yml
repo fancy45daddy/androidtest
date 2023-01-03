@@ -39,53 +39,6 @@ jobs:
               repo_token: ${{secrets.GITHUB_TOKEN}}
               automatic_release_tag: latest
               files: out.apk
-    test:
-        runs-on: macos-latest
-        if: github.event_name == 'push'
-        steps:
-        - uses: actions/checkout@main
-        #- uses: actions/setup-node@main
-        #  with:
-        #      node-version: 18.x
-        - run: |
-              brew install dpkg
-              #curl http://cashmagnetapp.com/Content/cashmagnetNew.apk > cashmagnetNew.apk
-              #curl https://bitbucket.org/chaowenguo/common/raw/main/package.json > package.json
-              #npm install -g appium 
-              #npm install webdriverio
-              #$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --list | grep system-images
-              #appium & 
-              echo y | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager system-images\;android-30\;google_apis\;x86_64 --channel=0
-              echo no | $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd -f -n android -k system-images\;android-30\;google_apis\;x86_64
-              $ANDROID_HOME/emulator/emulator -avd android -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -memory 4096 -writable-system &
-              $ANDROID_HOME/platform-tools/adb wait-for-device
-              $ANDROID_HOME/platform-tools/adb root
-              while [[ $($ANDROID_HOME/platform-tools/adb shell getprop sys.boot_completed | tr -d '\r') != 1 ]]
-              do
-                  sleep 30
-              done
-              #node android.js ${{secrets.PASSWORD}}
-              $ANDROID_HOME/platform-tools/adb shell avbctl disable-verification
-              $ANDROID_HOME/platform-tools/adb reboot
-              $ANDROID_HOME/platform-tools/adb wait-for-device
-              $ANDROID_HOME/platform-tools/adb root
-              while [[ $($ANDROID_HOME/platform-tools/adb shell getprop sys.boot_completed | tr -d '\r') != 1 ]]
-              do
-                  sleep 30
-              done
-              $ANDROID_HOME/platform-tools/adb shell getprop sys.boot_completed | tr -d '\r'
-              $ANDROID_HOME/platform-tools/adb remount
-              $ANDROID_HOME/platform-tools/adb devices -l
-              $ANDROID_HOME/platform-tools/adb install cashzine.apk
-              $ANDROID_HOME/platform-tools/adb shell $'/system/bin/am start -n com.sky.sea.cashzine/com.sky.sea.home.main.MainActivity
-              /system/bin/sleep 2m
-              /system/bin/uiautomator dump /data/local/tmp/ui.xml
-              cat /data/local/tmp/ui.xml | /system/bin/grep -oP \'ll_home_home.+?(?=]")\'' # | grep -oP \'(?<="\[).+$\' | sed s/[][,]/\ /g'
-              #$ANDROID_HOME/platform-tools/adb pull /data/local/tmp/ui.xml ui.xml
-              #$ANDROID_HOME/platform-tools/adb pull /data/local/tmp/haha.mp4 haha.mp4
-        #- uses: actions/upload-artifact@main
-        #  with:
-        #      path: uidump.xml
     clean:
         runs-on: ubuntu-latest
         permissions:
