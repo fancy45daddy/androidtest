@@ -74,7 +74,7 @@ do
         do
 	    sleep 10
             input swipe $halfWidth $((height / 10)) $halfWidth $(($((height / 10)) * 9))
-        doneKEYCODE_MEDIA_PLAY
+        done
     done
     sleep 5
     input tap $(($((${icon[0]} + ${icon[2]})) / 2)) $(($((${icon[1]} + ${icon[3]})) / 2))
