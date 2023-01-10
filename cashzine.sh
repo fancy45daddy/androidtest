@@ -53,7 +53,7 @@ sleep 1m
 mv /data/local/tmp/screenrecord /system/bin
 tap()
 {
-    sleep 10
+    sleep 20
     uiautomator dump /data/local/tmp/ui.xml
     array=($(awk -vRS=\> -vPattern="$1" -F= \$0~Pattern{gsub\(/[][\,\"]/\,\"\ \"\,\$NF\)\;print\$NF} /data/local/tmp/ui.xml))
     input tap $(($((${array[0]} + ${array[2]})) / 2)) $(($((${array[1]} + ${array[3]})) / 2))
@@ -88,7 +88,7 @@ do
         done
         for j in $(seq 0 1)
         do
-            sleep 10
+            sleetruep 10
             input swipe $halfWidth $((height / 10)) $halfWidth $(($((height / 10)) * 9))
         done
     done
