@@ -98,7 +98,7 @@ for k in $(seq 0 50)
 do
     sleep 20
     uiautomator dump /data/local/tmp/ui.xml
-    icon=($(awk -vRS=\> -F= /icon/{gsub\(/[][\,]/\,\"\ \"\,\$\(NF-1\)\)\;print\$\(NF-1\)} /data/local/tmp/ui.xml))
+    icon=($(awk -vRS=\> -F\" /icon/{gsub\(/[][\,]/\,\"\ \"\,\$\(NF-1\)\)\;print\$\(NF-1\)} /data/local/tmp/ui.xml))
     for i in $(seq 0 1)
     do
         for j in $(seq 0 1)
