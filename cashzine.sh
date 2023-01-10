@@ -55,7 +55,7 @@ tap()
 {
     sleep 20
     uiautomator dump /data/local/tmp/ui.xml
-    array=($(awk -vRS=\> -vPattern="$1" -F\" \$0~Pattern{gsub\(/[][\,]/\,\"\ \"\,\$\(NF-1\)\)\;print\$\(NF-\1)} /data/local/tmp/ui.xml))
+    array=($(awk -vRS=\> -vPattern="$1" -F\" \$0~Pattern{gsub\(/[][\,]/\,\"\ \"\,\$\(NF-1\)\)\;print\$\(NF-1\)} /data/local/tmp/ui.xml))
     input tap $(($((${array[0]} + ${array[2]})) / 2)) $(($((${array[1]} + ${array[3]})) / 2))
 }
 /system/bin/linker64 /system/bin/screenrecord /data/local/tmp/cashzine.mp4 &
