@@ -75,12 +75,12 @@ halfWidth=$((${array[0]} / 2))
 height=${array[1]}
 tap iv_book
 tap tv_read
-for i in $(seq 0 100)
+for i in $(seq 0 200)
 do
     sleep 10
     input swipe $halfWidth $(($((height / 10)) * 9)) $halfWidth $((height / 10))
 done
-for i in $(seq 0 100)
+for i in $(seq 0 200)
 do
     sleep 10
     input swipe $halfWidth $((height / 10)) $halfWidth $(($((height / 10)) * 9))
