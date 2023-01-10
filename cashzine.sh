@@ -75,7 +75,7 @@ array=($(wm size | awk {sub\(/x/\,\"\ \"\,\$NF\)\;print\$NF}))
 halfWidth=$((${array[0]} / 2))
 height=${array[1]}
 input tap $halfWidth $((height / 2))
-for k in $(seq 0 40)
+for k in $(seq 0 50)
 do
     uiautomator dump /data/local/tmp/ui.xml
     icon=($(awk -vRS=\> -F= /icon/{gsub\(/[][\,\"]/\,\"\ \"\,\$NF\)\;print\$NF} /data/local/tmp/ui.xml))
