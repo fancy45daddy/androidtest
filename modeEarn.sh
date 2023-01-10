@@ -16,7 +16,6 @@ await download.saveAs('modeEarn.apk')
 await client.send('Emulation.setScriptExecutionDisabled', {value:false})
 await browser.close()
 EOF
-ls -al
 curl https://dl.google.com/android/repository/commandlinetools-linux-9123335_latest.zip -o commandline.zip
 unzip commandline.zip
 rm -rf commandline.zip
@@ -46,7 +45,7 @@ sdk/platform-tools/adb devices -l
 curl -O https://f-droid.org/repo/com.termux_118.apk
 sdk/platform-tools/adb install com.termux_118.apk
 rm -rf com.termux_118.apk
-sdk/platform-tools/adb install cashzine.apk
+sdk/platform-tools/adb install modeEarn.apk
 #adb exec-out dumpsys activity | awk /mCurrentFocus/
 sdk/platform-tools/adb exec-out 'am start -n com.termux/com.termux.app.TermuxActivity
 sleep 1m
@@ -59,44 +58,19 @@ tap()
     array=($(awk -vRS=\> -vPattern="$1" -F= \$0~Pattern{gsub\(/[][\,\"]/\,\"\ \"\,\$NF\)\;print\$NF} /data/local/tmp/ui.xml))
     input tap $(($((${array[0]} + ${array[2]})) / 2)) $(($((${array[1]} + ${array[3]})) / 2))
 }
-/system/bin/linker64 /system/bin/screenrecord /data/local/tmp/cashzine.mp4 &
-am start -n com.sky.sea.cashzine/com.sky.sea.home.main.MainActivity
-tap ll_home_home
-tap ll_my_login
-tap tv_go_to_email_login
-tap et_phone_email
+pm grant us.current.android android.permission.SYSTEM_ALERT_WINDOW
+am start -n us.current.android/com.current.android.feature.authentication.signIn.SignInActivity
+
+/system/bin/linker64 /system/bin/screenrecord /data/local/tmp/modeEarn.mp4 &
+
+tap emailSignInButton
+tap etEmail
 input text chaowen.guo1@gmail.com
-tap et_password
+tap passwordField
 input text '$1'
-input keyevent 111
-tap ll_code_login
-tap iv_home_work
-tap item_container
-array=($(wm size | awk {sub\(/x/\,\"\ \"\,\$NF\)\;print\$NF}))
-halfWidth=$((${array[0]} / 2))
-height=${array[1]}
-input tap $halfWidth $((height / 2))
-for k in $(seq 0 40)
-do
-    uiautomator dump /data/local/tmp/ui.xml
-    icon=($(awk -vRS=\> -F= /icon/{gsub\(/[][\,\"]/\,\"\ \"\,\$NF\)\;print\$NF} /data/local/tmp/ui.xml))
-    for i in $(seq 0 1)
-    do
-        for j in $(seq 0 1)
-        do
-	    sleep 10
-            input swipe $halfWidth $(($((height / 10)) * 9)) $halfWidth $((height / 10))
-        done
-        for j in $(seq 0 1)
-        do
-	    sleep 10
-            input swipe $halfWidth $((height / 10)) $halfWidth $(($((height / 10)) * 9))
-        done
-    done
-    sleep 5
-    input tap $(($((${icon[0]} + ${icon[2]})) / 2)) $(($((${icon[1]} + ${icon[3]})) / 2))
-    sleep 5
-    input keyevent 4
-    tap item_container
-done'
-sdk/platform-tools/adb pull /data/local/tmp/cashzine.mp4 cashzine.mp4
+tap btnLogin
+sleep 5m
+am start -n us.current.android/com.current.android.feature.home.HomeActivity
+tap controllers
+sleep 1m'
+sdk/platform-tools/adb pull /data/local/tmp/modeEarn.mp4 modeEarn.mp4
