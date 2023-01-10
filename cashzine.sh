@@ -12,7 +12,7 @@ const client = await context.newCDPSession(page)
 await client.send('Emulation.setScriptExecutionDisabled', {value:true})
 await page.goto('https://m.apkpure.com/cashzine-earn-money-reward/com.sky.sea.cashzine/download?from=details')
 const [download] = await globalThis.Promise.all([page.waitForEvent('download'), page.click('a[href="https://d.apkpure.com/b/APK/com.sky.sea.cashzine?version=latest"]')])
-await download.saveAs('cashzine.apk');
+await download.saveAs('cashzine.apk')
 await client.send('Emulation.setScriptExecutionDisabled', {value:false})
 await browser.close()
 EOF
@@ -83,12 +83,12 @@ do
     do
         for j in $(seq 0 1)
         do
-	    sleep 10
+            sleep 10
             input swipe $halfWidth $(($((height / 10)) * 9)) $halfWidth $((height / 10))
         done
         for j in $(seq 0 1)
         do
-	    sleep 10
+            sleep 10
             input swipe $halfWidth $((height / 10)) $halfWidth $(($((height / 10)) * 9))
         done
     done
