@@ -114,7 +114,7 @@ do
         done
         for j in $(seq 0 1)
         do
-            sleetruep 10
+            sleep 10
             input swipe $halfWidth $((height / 10)) $halfWidth $(($((height / 10)) * 9))
         done
     done
