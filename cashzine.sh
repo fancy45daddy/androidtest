@@ -77,7 +77,7 @@ tap iv_book
 tap tv_read
 sleep 20
 uiautomator dump /data/local/tmp/ui.xml
-if [[ $(awk -vRS=\> -F\" /tv_point_total/{print\$4} /data/local/tmp/ui.xml) != 1000 ]]
+if [[ $(awk -vRS=\> -F\" /tv_point_total/{print\$4} /data/local/tmp/ui.xml) -lt 1000 ]]
 then
     for i in $(seq 0 200)
     do
