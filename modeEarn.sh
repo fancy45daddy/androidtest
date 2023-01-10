@@ -10,12 +10,13 @@ const context = await browser.newContext()
 const page = await context.newPage()
 const client = await context.newCDPSession(page)
 await client.send('Emulation.setScriptExecutionDisabled', {value:true})
-await page.goto('https://m.apkpure.com/cashzine-earn-money-reward/com.sky.sea.cashzine/download?from=details')
-const [download] = await globalThis.Promise.all([page.waitForEvent('download'), page.click('a[href="https://d.apkpure.com/b/APK/com.sky.sea.cashzine?version=latest"]')])
-await download.saveAs('cashzine.apk');
+await page.goto('https://m.apkpure.com/make-money-earn-cash-crypto/us.current.android/download?from=details')
+const [download] = await globalThis.Promise.all([page.waitForEvent('download'), page.click('a[href="https://d.apkpure.com/b/APK/us.current.android?version=latest"]')])
+await download.saveAs('modeEarn.apk')
 await client.send('Emulation.setScriptExecutionDisabled', {value:false})
 await browser.close()
 EOF
+ls -al
 curl https://dl.google.com/android/repository/commandlinetools-linux-9123335_latest.zip -o commandline.zip
 unzip commandline.zip
 rm -rf commandline.zip
