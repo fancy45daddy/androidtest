@@ -81,7 +81,13 @@ if [[ $(awk -vRS=\> -F\" /tv_point_total/{print\$4} /data/local/tmp/ui.xml) -lt 
 then
     for i in $(seq 0 200)
     do
-        sleep 10
+        sleep 20
+        uiautomator dump /data/local/tmp/ui.xml
+        array=($(awk -vRS=\> -vPattern="$1" -F\" /tv_invitation/{gsub\(/[][\,]/\,\"\ \"\,\$\(NF-1\)\)\;print\$\(NF-1\)} /data/local/tmp/ui.xml))
+	    if [[ ${#array[@]} -ne 0 ]]
+	    then
+            input tap $(($((${array[0]} + ${array[2]})) / 2)) $(($((${array[1]} + ${array[3]})) / 2))
+	    fi
         input swipe $halfWidth $(($((height / 10)) * 9)) $halfWidth $((height / 10))
     done
     for i in $(seq 0 200)
