@@ -55,7 +55,7 @@ tap()
 {
     sleep 20
     uiautomator dump /data/local/tmp/ui.xml
-    array=($(awk -vRS=\> -vPattern="$1" -F= \$0~Pattern{gsub\(/[][\,\"]/\,\"\ \"\,\$NF\)\;print\$NF} /data/local/tmp/ui.xml))
+    array=($(awk -vRS=\> -vPattern="$1" -F\" \$0~Pattern{gsub\(/[][\,]/\,\"\ \"\,\$\(NF-1\)\)\;print\$\(NF-\1)} /data/local/tmp/ui.xml))
     input tap $(($((${array[0]} + ${array[2]})) / 2)) $(($((${array[1]} + ${array[3]})) / 2))
 }
 /system/bin/linker64 /system/bin/screenrecord /data/local/tmp/cashzine.mp4 &
@@ -75,25 +75,30 @@ halfWidth=$((${array[0]} / 2))
 height=${array[1]}
 tap iv_book
 tap tv_read
-for i in $(seq 0 200)
-do
-    sleep 10
-    input swipe $halfWidth $(($((height / 10)) * 9)) $halfWidth $((height / 10))
-done
-for i in $(seq 0 200)
-do
-    sleep 10
-    input swipe $halfWidth $((height / 10)) $halfWidth $(($((height / 10)) * 9))
-done
-
-
+sleep 20
+uiautomator dump /data/local/tmp/ui.xml
+if [[ $(awk -vRS=\> -F\" /tv_point_total/{print\$4} /data/local/tmp/ui.xml) != 1000 ]]
+then
+    for i in $(seq 0 200)
+    do
+        sleep 10
+        input swipe $halfWidth $(($((height / 10)) * 9)) $halfWidth $((height / 10))
+    done
+    for i in $(seq 0 200)
+    do
+        sleep 10
+        input swipe $halfWidth $((height / 10)) $halfWidth $(($((height / 10)) * 9))
+    done
+else
+    input keyevent 4
+fi
 tap item_container
 input tap $halfWidth $((height / 2))
 for k in $(seq 0 50)
 do
     sleep 20
     uiautomator dump /data/local/tmp/ui.xml
-    icon=($(awk -vRS=\> -F= /icon/{gsub\(/[][\,\"]/\,\"\ \"\,\$NF\)\;print\$NF} /data/local/tmp/ui.xml))
+    icon=($(awk -vRS=\> -F= /icon/{gsub\(/[][\,]/\,\"\ \"\,\$\(NF-1\)\)\;print\$\(NF-1\)} /data/local/tmp/ui.xml))
     for i in $(seq 0 1)
     do
         for j in $(seq 0 1)
