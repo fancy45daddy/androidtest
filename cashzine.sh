@@ -100,7 +100,7 @@ else
 fi
 tap item_container
 input tap $halfWidth $((height / 2))
-for k in $(seq 0 50)
+for k in $(seq 0 30)
 do
     sleep 20
     uiautomator dump /data/local/tmp/ui.xml
