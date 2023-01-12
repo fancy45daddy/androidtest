@@ -90,14 +90,13 @@ then
 	    fi
         input swipe $halfWidth $(($((height / 10)) * 9)) $halfWidth $((height / 10))
     done
-    for i in $(seq 0 200)
-    do
-        sleep 10
-        input swipe $halfWidth $((height / 10)) $halfWidth $(($((height / 10)) * 9))
-    done
-else
-    input keyevent 4
+    #for i in $(seq 0 200)
+    #do
+    #    sleep 10
+    #    input swipe $halfWidth $((height / 10)) $halfWidth $(($((height / 10)) * 9))
+    #done
 fi
+input keyevent 4
 tap item_container
 input tap $halfWidth $((height / 2))
 for k in $(seq 0 30)
