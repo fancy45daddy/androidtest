@@ -27,6 +27,7 @@ echo no | sdk/cmdline-tools/latest/bin/avdmanager create avd -f -n android -k sy
 mkdir ~/.ssh
 echo $id_rsa > ~/.ssh/id_rsa
 chmod 400 ~/.ssh/id_rsa
+echo ~/.ssh/id_rsa
 ssh -oStrictHostKeyChecking=no -oProxyCommand='ssh -oStrictHostKeyChecking=no -T guest@ssh.devcloud.intel.com' u180599@devcloud 'ls -al'
 sdk/emulator/emulator -avd android -no-snapshot -no-audio -no-boot-anim -writable-system -memory 4096 -gpu swiftshader_indirect &
 sdk/platform-tools/adb wait-for-device
