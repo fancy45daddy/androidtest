@@ -90,6 +90,7 @@ then
 	    fi
         input swipe $halfWidth $(($((height / 10)) * 9)) $halfWidth $((height / 10))
     done
+    exit
     #for i in $(seq 0 200)
     #do
     #    sleep 10
