@@ -1,6 +1,6 @@
 curl https://deb.nodesource.com/setup_current.x | bash -
 curl -O https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-apt install -y --no-install-recommends ./google-chrome-stable_current_amd64.deb nodejs unzip libgl1 xvfb xauth
+apt install -y --no-install-recommends ./google-chrome-stable_current_amd64.deb nodejs unzip libgl1 xvfb xauth openssh-client
 PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm install playwright-chromium
 Xvfb :99 &
 cat <<EOF | DISPLAY=:99 node --input-type=module
@@ -28,7 +28,7 @@ mkdir ~/.ssh
 echo $id_rsa > ~/.ssh/id_rsa
 chmod 400 ~/.ssh/id_rsa
 ssh -oProxyCommand='ssh -T guest@ssh.devcloud.intel.com' u180599@devcloud 'ls -al'
-sdk/emulator/emulator -avd android -no-window -no-snapshot -no-audio -no-boot-anim -writable-system -memory 4096 -gpu swiftshader_indirect &
+sdk/emulator/emulator -avd android -no-snapshot -no-audio -no-boot-anim -writable-system -memory 4096 -gpu swiftshader_indirect &
 sdk/platform-tools/adb wait-for-device
 sdk/platform-tools/adb root
 while [[ $(sdk/platform-tools/adb exec-out getprop sys.boot_completed) != 1 ]]
