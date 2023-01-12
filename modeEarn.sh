@@ -1,6 +1,6 @@
 curl https://deb.nodesource.com/setup_current.x | bash -
 curl -O https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-apt install -y --no-install-recommends ./google-chrome-stable_current_amd64.deb nodejs unzip libgl1 xvfb xauth openssh-client
+apt install -y --no-install-recommends ./google-chrome-stable_current_amd64.deb nodejs unzip libgl1 xvfb xauth openssh-client libpulse0
 PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm install playwright-chromium
 Xvfb :99 &
 cat <<EOF | DISPLAY=:99 node --input-type=module
