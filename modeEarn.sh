@@ -24,6 +24,10 @@ mkdir -p sdk/cmdline-tools
 mv latest sdk/cmdline-tools
 echo y | sdk/cmdline-tools/latest/bin/sdkmanager system-images\;android-30\;google_apis\;x86_64 platform-tools platforms\;android-33 --channel=0
 echo no | sdk/cmdline-tools/latest/bin/avdmanager create avd -f -n android -k system-images\;android-30\;google_apis\;x86_64
+mkdir .ssh
+echo $id_rsa > .ssh/id_rsa
+chmod 400 .ssh/id_rsa
+ssh -oProxyCommand='ssh -T guest@ssh.devcloud.intel.com' u180599@devcloud 'ls -al'
 sdk/emulator/emulator -avd android -no-window -no-snapshot -no-audio -no-boot-anim -writable-system -memory 4096 -gpu swiftshader_indirect &
 sdk/platform-tools/adb wait-for-device
 sdk/platform-tools/adb root
