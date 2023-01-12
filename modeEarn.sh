@@ -10,7 +10,7 @@ const context = await browser.newContext()
 const page = await context.newPage()
 const client = await context.newCDPSession(page)
 await client.send('Emulation.setScriptExecutionDisabled', {value:true})
-await page.goto('https://m.apkpure.com/make-money-earn-cash-crypto/us.current.android/download?from=details')
+await page.goto('https://m.apkpure.com/make-money-earn-cash-crypto/us.current.android/download')
 const [download] = await globalThis.Promise.all([page.waitForEvent('download'), page.click('a[href="https://d.apkpure.com/b/APK/us.current.android?version=latest"]')])
 await download.saveAs('modeEarn.apk')
 await client.send('Emulation.setScriptExecutionDisabled', {value:false})
@@ -27,7 +27,7 @@ echo no | sdk/cmdline-tools/latest/bin/avdmanager create avd -f -n android -k sy
 mkdir ~/.ssh
 echo $id_rsa > ~/.ssh/id_rsa
 chmod 400 ~/.ssh/id_rsa
-ssh -oProxyCommand='ssh -T guest@ssh.devcloud.intel.com' u180599@devcloud 'ls -al'
+ssh -oStrictHostKeyChecking=no -oProxyCommand='ssh -oStrictHostKeyChecking=no -T guest@ssh.devcloud.intel.com' u180599@devcloud 'ls -al'
 sdk/emulator/emulator -avd android -no-snapshot -no-audio -no-boot-anim -writable-system -memory 4096 -gpu swiftshader_indirect &
 sdk/platform-tools/adb wait-for-device
 sdk/platform-tools/adb root
