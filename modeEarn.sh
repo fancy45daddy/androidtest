@@ -50,6 +50,7 @@ sdk/platform-tools/adb install com.termux_118.apk
 rm -rf com.termux_118.apk
 sdk/platform-tools/adb install modeEarn.apk
 #adb exec-out dumpsys activity | awk /mCurrentFocus/
+curl -x http://localhost:8118 https://ifconfig.me
 sdk/platform-tools/adb exec-out 'am start -n com.termux/com.termux.app.TermuxActivity
 sleep 1m
 /data/data/com.termux/files/usr/bin/gawk -vRS=\\n{10} {print\ gensub\(/\\xb4\\x00\\x00\\x00/\,\"\\xff\\xff\\xff\\xff\"\,20\)} /system/bin/screenrecord | /data/data/com.termux/files/usr/bin/head -c -1 > /data/local/tmp/screenrecord
