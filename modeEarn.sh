@@ -27,6 +27,7 @@ echo no | sdk/cmdline-tools/latest/bin/avdmanager create avd -f -n android -k sy
 ssh -fNT -D 1080 -oStrictHostKeyChecking=no -oProxyCommand='ssh -oStrictHostKeyChecking=no -T guest@ssh.devcloud.intel.com' u180599@devcloud
 echo 'forward-socks5t   /  127.0.0.1:1080 .' | tee -a /etc/privoxy/config
 service privoxy start
+service privoxy status
 curl -x http://localhost:8118 https://ifconfig.me
 DISPLAY=:99 sdk/emulator/emulator -avd android -no-snapshot -no-audio -no-boot-anim -writable-system -memory 4096 -gpu swiftshader_indirect -http-proxy http://localhost:8118 &
 sdk/platform-tools/adb wait-for-device
