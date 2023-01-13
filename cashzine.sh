@@ -79,7 +79,7 @@ sleep 20
 uiautomator dump /data/local/tmp/ui.xml
 if [[ $(awk -vRS=\> -F\" /tv_point_total/{print\$4} /data/local/tmp/ui.xml) -lt 1000 ]]
 then
-    for i in $(seq 0 200)
+    for i in $(seq 0 300)
     do
         sleep 20
         uiautomator dump /data/local/tmp/ui.xml
@@ -90,12 +90,6 @@ then
 	    fi
         input swipe $halfWidth $(($((height / 10)) * 9)) $halfWidth $((height / 10))
     done
-    exit
-    #for i in $(seq 0 200)
-    #do
-    #    sleep 10
-    #    input swipe $halfWidth $((height / 10)) $halfWidth $(($((height / 10)) * 9))
-    #done
 fi
 input keyevent 4
 tap item_container
