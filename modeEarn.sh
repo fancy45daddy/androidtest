@@ -25,7 +25,7 @@ mv latest sdk/cmdline-tools
 echo y | sdk/cmdline-tools/latest/bin/sdkmanager system-images\;android-30\;google_apis\;x86_64 platform-tools platforms\;android-33 --channel=0
 echo no | sdk/cmdline-tools/latest/bin/avdmanager create avd -f -n android -k system-images\;android-30\;google_apis\;x86_64
 ssh -fNT -D 1080 -oStrictHostKeyChecking=no -oProxyCommand='ssh -oStrictHostKeyChecking=no -T guest@ssh.devcloud.intel.com' u180599@devcloud
-echo 'forward-socks5t   /  127.0.0.1:1080 .' | tee -a /etc/privoxy/config
+echo 'forward-socks5t   /  127.0.0.1:1080 .' >> /etc/privoxy/config
 service privoxy start
 sdk/emulator/emulator -avd android -no-window -no-snapshot -no-audio -no-boot-anim -writable-system -memory 4096 -gpu swiftshader_indirect -http-proxy http://localhost:8118 &
 sdk/platform-tools/adb wait-for-device
