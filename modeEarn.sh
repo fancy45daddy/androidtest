@@ -28,6 +28,7 @@ echo 'forward-socks5t   /  127.0.0.1:1080 .' >> /etc/privoxy/config
 service privoxy start
 ssh -fNT -D 1080 -oServerAliveInterval=10 -oStrictHostKeyChecking=no -oProxyCommand='ssh -oServerAliveInterval=10 -oStrictHostKeyChecking=no -T guest@ssh.devcloud.intel.com' u180599@devcloud
 sdk/emulator/emulator -avd android -no-window -no-snapshot -no-audio -no-boot-anim -writable-system -memory 4096 -gpu swiftshader_indirect -http-proxy http://localhost:8118 &
+curl -x http://localhost:8118 https://ifconfig.me
 sdk/platform-tools/adb wait-for-device
 sdk/platform-tools/adb root
 while [[ $(sdk/platform-tools/adb exec-out getprop sys.boot_completed) != 1 ]]
