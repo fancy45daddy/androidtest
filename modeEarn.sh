@@ -61,11 +61,11 @@ tap()
     array=($(awk -vRS=\> -vPattern="$1" -F= \$0~Pattern{gsub\(/[][\,\"]/\,\"\ \"\,\$NF\)\;print\$NF} /data/local/tmp/ui.xml))
     input tap $(($((${array[0]} + ${array[2]})) / 2)) $(($((${array[1]} + ${array[3]})) / 2))
 }
-/data/data/com.termux/files/usr/bin/curl https://ifconfig.me
 pm grant us.current.android android.permission.SYSTEM_ALERT_WINDOW
 am start -n us.current.android/com.current.android.feature.authentication.signIn.SignInActivity
-
 /system/bin/linker64 /system/bin/screenrecord /data/local/tmp/modeEarn.mp4 &
+
+/data/data/com.termux/files/usr/bin/curl https://ifconfig.me
 
 tap emailSignInButton
 tap etEmail
