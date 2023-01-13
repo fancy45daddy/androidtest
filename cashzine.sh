@@ -94,7 +94,7 @@ fi
 input keyevent 4
 tap item_container
 input tap $halfWidth $((height / 2))
-for k in $(seq 0 30)
+for k in $(seq 0 40)
 do
     sleep 20
     uiautomator dump /data/local/tmp/ui.xml
