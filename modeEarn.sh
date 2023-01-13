@@ -26,7 +26,6 @@ echo y | sdk/cmdline-tools/latest/bin/sdkmanager system-images\;android-30\;goog
 echo no | sdk/cmdline-tools/latest/bin/avdmanager create avd -f -n android -k system-images\;android-30\;google_apis\;x86_64
 echo 'forward-socks5t   /  127.0.0.1:1080 .' >> /etc/privoxy/config
 service privoxy start
-ssh -fNT -D 1080 -oServerAliveInterval=5 -oStrictHostKeyChecking=no -oProxyCommand='ssh -oServerAliveInterval=5 -oStrictHostKeyChecking=no -T guest@ssh.devcloud.intel.com' u180599@devcloud
 sdk/emulator/emulator -avd android -no-window -no-snapshot -no-audio -no-boot-anim -writable-system -memory 4096 -gpu swiftshader_indirect -http-proxy http://localhost:8118 &
 sdk/platform-tools/adb wait-for-device
 sdk/platform-tools/adb root
@@ -50,6 +49,7 @@ sdk/platform-tools/adb install com.termux_118.apk
 rm -rf com.termux_118.apk
 sdk/platform-tools/adb install modeEarn.apk
 #adb exec-out dumpsys activity | awk /mCurrentFocus/
+ssh -fNT -D 1080 -oServerAliveInterval=5 -oStrictHostKeyChecking=no -oProxyCommand='ssh -oServerAliveInterval=5 -oStrictHostKeyChecking=no -T guest@ssh.devcloud.intel.com' u180599@devcloud
 curl -x http://localhost:8118 https://ifconfig.me
 sdk/platform-tools/adb exec-out 'am start -n com.termux/com.termux.app.TermuxActivity
 sleep 1m
