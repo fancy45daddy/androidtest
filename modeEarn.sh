@@ -77,4 +77,5 @@ sleep 5m
 am start -n us.current.android/com.current.android.feature.home.HomeActivity
 tap controllers
 sleep 1m'
+sleep 18000
 $ANDROID_HOME/platform-tools/adb pull /data/local/tmp/modeEarn.mp4
