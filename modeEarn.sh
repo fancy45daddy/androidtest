@@ -73,8 +73,8 @@ input text chaowen.guo1@gmail.com
 tap passwordField
 input text '$1'
 tap btnLogin
-sleep 5m
-am start -n us.current.android/com.current.android.feature.home.HomeActivity
+#sleep 5m
+#am start -n us.current.android/com.current.android.feature.home.HomeActivity
 tap controllers
 sleep 1m'
 sleep 18000
