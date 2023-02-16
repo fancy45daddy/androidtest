@@ -5,13 +5,13 @@ cp -R /Volumes/traffmonetizer/Traffmonetizer.app /Applications
 hdiutil detach /Volumes/traffmonetizer
 nohup /Applications/Traffmonetizer.app/Contents/MacOS/traffmonetizer &
 echo y | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager system-images\;android-30\;google_apis\;x86_64 --channel=0 #ffmpeg -f avfoundation -i 0:0 -t 30s output.mp4
-ls -al ~/Downloads/*.apk
-pkill -9 -f Google
-mv ~/Downloads/*.apk modeEarn.apk
 brew install privoxy
 echo 'forward-socks5   /               127.0.0.1:1080 .' >  /usr/local/etc/privoxy/config
 sudo /usr/local/opt/privoxy/sbin/privoxy /usr/local/etc/privoxy/config
 ssh -fCNT -D 1080 -oStrictHostKeyChecking=no -oProxyCommand='ssh -oStrictHostKeyChecking=no -T guest@ssh.devcloud.intel.com' u180599@devcloud
+ls -al ~/Downloads/*.apk
+pkill -9 -f Google
+mv ~/Downloads/*.apk modeEarn.apk
 while true
 do
     echo no | $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd -f -n android -k system-images\;android-30\;google_apis\;x86_64
