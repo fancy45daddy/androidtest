@@ -67,7 +67,7 @@ $ANDROID_HOME/platform-tools/adb exec-out 'tap()
 linker64 /system/bin/screenrecord /data/local/tmp/modeEarn.mp4 &
 /data/data/com.termux/files/usr/bin/curl https://ifconfig.me
 
-tap emailSignInButton
+tap mailSignInButton
 tap etEmail
 input text chaowen.guo1@gmail.com
 tap passwordField
