@@ -8,13 +8,17 @@ echo y | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager system-images\;androi
 osascript <<EOF
 tell application "System Events"
     tell process "traffmonetizer"
-        return entire contents
+        tell window "Traffmonetizer"
+            return entire contents
+        end tell
     end tell
 end tell
 EOF
+brew install gawk
 ls -al ~/Downloads/*.apk
 pkill -9 -f Google
 mv ~/Downloads/*.apk cashzine.apk
+package=$($ANDROID_HOME/build-tools/33.0.1/aapt dump badging *.apk | awk -F\' /package/{print\$2})
 while true
 do
     echo no | $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd -f -n android -k system-images\;android-30\;google_apis\;x86_64
@@ -36,19 +40,15 @@ do
     $ANDROID_HOME/platform-tools/adb exec-out getprop sys.boot_completed
     $ANDROID_HOME/platform-tools/adb remount
     $ANDROID_HOME/platform-tools/adb devices -l
-    curl -O https://f-droid.org/repo/com.termux_118.apk
-    $ANDROID_HOME/platform-tools/adb install com.termux_118.apk
-    rm -rf com.termux_118.apk
     $ANDROID_HOME/platform-tools/adb exec-out 'settings put global window_animation_scale 0
     settings put global transition_animation_scale 0
-    settings put global animator_duration_scale 0
-    am start -n com.termux/com.termux.app.TermuxActivity'
+    settings put global animator_duration_scale 0'
     $ANDROID_HOME/platform-tools/adb install cashzine.apk
-    $ANDROID_HOME/platform-tools/adb exec-out 'am force-stop com.termux
-    /data/data/com.termux/files/usr/bin/gawk -vRS=\\n{10} {print\ gensub\(/\\xb4\\x00\\x00\\x00/\,\"\\xff\\xff\\xff\\xff\"\,20\)} /system/bin/screenrecord | /data/data/com.termux/files/usr/bin/head -c -1 > /data/local/tmp/screenrecord
-    mv /data/local/tmp/screenrecord /system/bin'
+    $ANDROID_HOME/platform-tools/adb pull /system/bin/screenrecord screenrecord
+    gawk -i inplace -vRS=\\n{10} {printf\"%s\"\,gensub\(/\\xb4\\x00\\x00\\x00/\,\"\\xff\\xff\\xff\\xff\"\,20\)} screenrecord
+    $ANDROID_HOME/platform-tools/adb push screenrecord /system/bin/screenrecord
     $ANDROID_HOME/platform-tools/adb exec-out 'am start -n com.sky.sea.cashzine/com.sky.sea.home.main.MainActivity'
-    sleep 120
+    sleep 30
     if [[ $($ANDROID_HOME/platform-tools/adb exec-out 'dumpsys activity | awk /mCurrentFocus/') == *"Not Responding: com.android.systemui"* ]]
     then
         pkill -9 -f qemu
@@ -60,13 +60,9 @@ do
 done
 $ANDROID_HOME/platform-tools/adb exec-out 'tap()
 {
-    while true
-    do
-        sleep 30
-        uiautomator dump /data/local/tmp/ui.xml
-        array=($(awk -vRS=\> -vPattern="$1" -F\" \$0~Pattern{gsub\(/[][\,]/\,\"\ \"\,\$\(NF-1\)\)\;print\$\(NF-1\)} /data/local/tmp/ui.xml))
-        [[ ${#array[@]} -eq 0 ]] || break
-    done
+    sleep 30
+    uiautomator dump /data/local/tmp/ui.xml
+    array=($(awk -vRS=\> -vPattern="$1" -F\" \$0~Pattern{gsub\(/[][\,]/\,\"\ \"\,\$\(NF-1\)\)\;print\$\(NF-1\)} /data/local/tmp/ui.xml))
     echo ${array[@]}
     input tap $(($((${array[0]} + ${array[2]})) / 2)) $(($((${array[1]} + ${array[3]})) / 2))
 }
@@ -74,6 +70,7 @@ $ANDROID_HOME/platform-tools/adb exec-out 'tap()
 linker64 /system/bin/screenrecord /data/local/tmp/cashzine.mp4 &
 
 tap ll_home_home
+sleep 1m
 tap ll_my_login
 tap tv_go_to_email_login
 tap et_phone_email
