@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>Bt(宝塔面板)安装wordpress以及如何开启最简单实用的动静分离优化！ - 大鸟博客</title>
+<meta name="description" content="今天说的还是Bt(宝塔面板)方面的教程，我们都知道，利用wordpress建站，很方便，而且wordpress优化起来也很方便，相关的教程网上搜索下还是有很多的！我们用wordpress建好站点之后，首要的就是要给wordpress做优化，大鸟前面也有讲过教程。这里大鸟在简单的说一下！" />
+<meta name="keywords" content="WordPress,宝塔面板,Bt（宝塔面板）,memcached+Batcache" />
+<meta property="og:type" content="acticle">
+<meta property="og:locale" content="zh-CN" />
+<meta property="og:title" content="Bt(宝塔面板)安装wordpress以及如何开启最简单实用的动静分离优化！" />
+<meta property="og:author" content="大鸟" />
+<meta property="og:image" content="https://www.daniao.org/wp-content/uploads/2018/06/0066LGKLly1frf8z6pthdj30v407eq4u.jpg" />
+<meta property="og:site_name" content="大鸟博客">
+<meta property="og:description" content="今天说的还是Bt(宝塔面板)方面的教程，我们都知道，利用wordpress建站，很方便，而且wordpress优化起来也很方便，相关的教程网上搜索下还是有很多的！我们用wordpress建好站点之后，首要的就是要给wordpress做优化，大鸟前面也有讲过教程。这里大鸟在简单的说一下！" />
+<meta property="og:url" content="https://www.daniao.org/2590.html" />
+<meta property="og:release_date" content="2018年6月7日18:01:29" />
+<link rel="shortcut icon" href="../wp-content/uploads/2019/05/favicon.png">
+<link rel="apple-touch-icon" sizes="114x114" href="../wp-content/themes/begin/img/favicon.png" />
+<link rel="pingback" href="https://www.daniao.org/xmlrpc.php">
+<meta name='robots' content='max-image-preview:large' />
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('index.html');--wp--preset--duotone--grayscale: url('index.html');--wp--preset--duotone--purple-yellow: url('index.html');--wp--preset--duotone--blue-red: url('index.html');--wp--preset--duotone--midnight: url('index.html');--wp--preset--duotone--magenta-yellow: url('index.html');--wp--preset--duotone--purple-green: url('index.html');--wp--preset--duotone--blue-orange: url('index.html');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<link rel='stylesheet' id='begin-style-css'  href='../wp-content/themes/begin/style.css?ver=2021%252F12%252F12' type='text/css' media='all' />
+<link rel='stylesheet' id='be-css'  href='../wp-content/themes/begin/css/be.css?ver=2021%252F12%252F12' type='text/css' media='all' />
+<link rel='stylesheet' id='fonts-css'  href='../wp-content/themes/begin/css/fonts/fonts.css?ver=2021%252F12%252F12' type='text/css' media='all' />
+<link rel='stylesheet' id='icons-css'  href='../wp-content/themes/begin/css/icons/icons.css?ver=2021%252F12%252F12' type='text/css' media='all' />
+<link rel='stylesheet' id='dashicons-css'  href='../wp-includes/css/dashicons.min.css?ver=5.9.3' type='text/css' media='all' />
+<link rel='stylesheet' id='iconfontd-css'  href='https://at.alicdn.com/t/font_968129_uxa92lcq0ta.css?ver=2021/12/12' type='text/css' media='all' />
+<link rel='stylesheet' id='highlight-css'  href='../wp-content/themes/begin/css/highlight.css?ver=2021%252F12%252F12' type='text/css' media='all' />
+<link rel='stylesheet' id='prettify-css'  href='../wp-content/themes/begin/css/prettify.css?ver=2021%252F12%252F12' type='text/css' media='all' />
+<script type='text/javascript' src='../wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='../wp-content/themes/begin/js/jquery.lazyload.js?ver=2021%252F12%252F12' id='lazyload-js'></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.daniao.org/wp-content/themes/begin/js/html5.js?ver=2021/12/12' id='html5-js'></script>
+<![endif]-->
+<link rel="canonical" href="index.html" />
+<style type="text/css">.single-post .entry-header h1, .single-content h3, .single-content h4, .single-content h6, .single-content h2 {border-left: 5px solid #1e73be;}.tagcloud {
+    overflow: hidden;
+    padding: 15px 0 12px 15px;
+}
+.tagcloud a {
+    float: left;
+    width: 31.3333%;
+    margin: 0 1% 1% 0;
+    padding: 0 8px;
+    color: #fff;
+    height: 29px;
+    line-height: 29px;
+    text-align: center;
+    font-size: 12px;
+    opacity: .7;
+    border-radius: 2px;
+    overflow: hidden;
+}
+ .tips {
+    position: absolute;
+    top: 14px;
+    left: 1px;
+    background-color: #FFFF00;
+    padding: 1px 3px 2px;
+    border-radius: 3px;
+    animation: moveUpDown 1s infinite;
+    -webkit-animation: moveUpDown 1s infinite;
+}
+.tips {
+    margin-left: 20px;
+    color: #666;
+}@media screen and (min-width: 1025px) {.nav-menu li.menu-item:nth-child(n+8){display: none;}}.planned {transition: width 4000ms;}</style><style type="text/css" id="custom-background-css">
+body.custom-background { background-image: url("../wp-content/uploads/2019/05/bg-light-min.jpg"); background-position: left top; background-size: auto; background-repeat: repeat; background-attachment: scroll; }
+</style>
+	<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d2ee56508881021f9b68943d7ac789dd";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</head>
+<body class="post-template-default single single-post postid-2590 single-format-standard custom-background" ontouchstart="">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-dark-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 0.49803921568627" /><feFuncG type="table" tableValues="0 0.49803921568627" /><feFuncB type="table" tableValues="0 0.49803921568627" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-grayscale"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 1" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0 1" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-purple-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.54901960784314 0.98823529411765" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0.71764705882353 0.25490196078431" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-blue-red"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 1" /><feFuncG type="table" tableValues="0 0.27843137254902" /><feFuncB type="table" tableValues="0.5921568627451 0.27843137254902" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-midnight"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0 0" /><feFuncG type="table" tableValues="0 0.64705882352941" /><feFuncB type="table" tableValues="0 1" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-magenta-yellow"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.78039215686275 1" /><feFuncG type="table" tableValues="0 0.94901960784314" /><feFuncB type="table" tableValues="0.35294117647059 0.47058823529412" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-purple-green"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.65098039215686 0.40392156862745" /><feFuncG type="table" tableValues="0 1" /><feFuncB type="table" tableValues="0.44705882352941 0.4" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;" ><defs><filter id="wp-duotone-blue-orange"><feColorMatrix color-interpolation-filters="sRGB" type="matrix" values=" .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 .299 .587 .114 0 0 " /><feComponentTransfer color-interpolation-filters="sRGB" ><feFuncR type="table" tableValues="0.098039215686275 1" /><feFuncG type="table" tableValues="0 0.66274509803922" /><feFuncB type="table" tableValues="0.84705882352941 0.41960784313725" /><feFuncA type="table" tableValues="1 1" /></feComponentTransfer><feComposite in2="SourceGraphic" operator="in" /></filter></defs></svg>	<script>
+		if (localStorage.getItem('beNightMode')) {
+			document.body.className +=' night';
+		}
+	</script>
+	<div id="page" class="hfeed site">
+	<header id="masthead" class="site-header site-header-h">
+	<div id="header-main" class="header-main">
+				<div id="menu-container" class="da menu-glass">
+			<div id="navigation-top" class="bgt menu_c">
+				<span class="nav-search"></span>														<div class="logo-site">
+												<p class="site-title">
+						<a href="https://www.daniao.org/">
+			<span class="logo-small"><img src="../wp-content/themes/begin/img/logo-s.png" alt="大鸟博客" /></span>
+			大鸟博客		</a>
+	
+	
+			</p>
+
+								<p class="site-description clear-small">分享是一种美德~</p>
+								</div>
+
+									<div id="site-nav-wrap" class="site-nav-wrap-right">
+									<div id="sidr-close">
+						<span class="toggle-sidr-close"><i class="be be-cross"></i></span>
+												</div>
+					<nav id="site-nav" class="main-nav nav-ace">
+									<span id="navigation-toggle" class="bars"><i class="be be-menu"></i></span>
+	
+		<div class="menu-%e5%af%bc%e8%88%aa%e8%8f%9c%e5%8d%95-container"><ul id="menu-%e5%af%bc%e8%88%aa%e8%8f%9c%e5%8d%95" class="down-menu nav-menu main-menu-more"><li id="menu-item-12946" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-12946"><a href="https://www.daniao.org/">VPS监控</a>
+<ul class="sub-menu">
+	<li id="menu-item-12865" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12865"><a target="_blank" rel="external nofollow" href="https://buyvm.qixi.me">buyvm实时库存</a></li>
+	<li id="menu-item-12864" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12864"><a target="_blank" rel="external nofollow" href="https://bwh.qixi.me/">瓦工实时库存</a></li>
+	<li id="menu-item-16495" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-16495"><a target="_blank" rel="noopener" href="https://spartan.qixi.me/">斯巴达实时监控</a></li>
+</ul>
+</li>
+<li id="menu-item-12624" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-12624"><a href="../dulifuwuqi/index.html">独立服务器</a></li>
+<li id="menu-item-342" class="glyphicon glyphicon-phone menu-item menu-item-type-taxonomy menu-item-object-category menu-item-342"><a href="../vps-control/index.html">VPS评测</a></li>
+<li id="menu-item-11649" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-11649"><a href="../vps-preferential-evaluation/index.html">VPS优惠</a></li>
+<li id="menu-item-11956" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-11956"><a href="../vps-tuijian/index.html">VPS推荐</a>
+<ul class="sub-menu">
+	<li id="menu-item-11961" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11961"><a href="../11943.html/index.html">美国 cn2 gia vps</a></li>
+	<li id="menu-item-12575" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12575"><a href="../12574.html">联通4837 vps</a></li>
+	<li id="menu-item-14799" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14799"><a href="../14795.html">联通9929 vps</a></li>
+	<li id="menu-item-11957" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-11957"><a href="../11036.html/index.html">香港 cn2 gia vps</a></li>
+	<li id="menu-item-14396" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-14396"><a href="../14368.html">新加坡cn2 gia vps</a></li>
+	<li id="menu-item-12387" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12387"><a href="../12385.html">欧洲 cn2 gia vps</a></li>
+	<li id="menu-item-12050" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12050"><a href="../11576.html/index.html">南非 cn2 gia vps</a></li>
+	<li id="menu-item-12627" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12627"><a href="../12625.html">大硬盘VPS</a></li>
+	<li id="menu-item-12663" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12663"><a href="../12661.html">windows vps</a></li>
+	<li id="menu-item-12798" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-12798"><a href="../12796.html">日本软银VPS</a></li>
+	<li id="menu-item-13120" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-13120"><a href="../13055.html">俄罗斯cn2 gia vps</a></li>
+	<li id="menu-item-15462" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-15462"><a href="../15461.html">不限流量cn2 gia vps</a></li>
+</ul>
+</li>
+<li id="menu-item-14373" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-14373"><a href="../vps/index.html">VPS主机</a></li>
+<li id="menu-item-3480" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3480"><a href="../btpanel/index.html">宝塔面板</a></li>
+<li class="nav-more"><span class="nav-more-i"><i class="be be-more"></i></span><ul class="menu-more-li"></ul></li></ul></div>
+<div id="overlay"></div>
+					</nav>
+				</div>
+								<div class="ajax-content-box nav-img-post bk" data-text="W25hdl9pbWdd"></div>								<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+</header>
+<div id="search-main" class="da">
+	<div class="off-search-a"></div>
+	<div class="search-wrap bgt fadeInDown animated">
+					<div class="searchbar da">
+							<form method="get" id="searchform-so" action="https://www.daniao.org/">
+					<span class="search-input">
+						<input type="text" value="" name="s" id="so" class="bk dah" placeholder="" required />
+						<button type="submit" id="searchsubmit-so" class="bk da"><i class="be be-search"></i></button>
+					</span>
+										<div class="clear"></div>
+				</form>
+						</div>
+		
+				<div class="searchbar da">
+			<script>
+			function g(formname) {
+				var url = "https://www.baidu.com/baidu";
+				if (formname.s[1].checked) {
+					formname.ct.value = "2097152";
+				} else {
+					formname.ct.value = "0";
+				}
+				formname.action = url;
+				return true;
+			}
+			</script>
+			<form name="f1" onsubmit="return g(this)" target="_blank">
+				<span class="search-input">
+					<input name=word class="swap_value bk dah" placeholder="百度一下" name="q" />
+					<input name=tn type=hidden value="bds" />
+					<input name=cl type=hidden value="3" />
+					<input name=ct type=hidden />
+					<input name=si type=hidden value="www.daniao.org" />
+					<button type="submit" id="searchbaidu" class="search-close bk da"><i class="be be-baidu"></i></button>
+					<input name=s class="choose" type=radio />
+					<input name=s class="choose" type=radio checked />
+				</span>
+			</form>
+		</div>
+		
+					<div class="searchbar da">
+				<form method="get" id="searchform" action="https://cse.google.com/cse" target="_blank">
+					<span class="search-input">
+						<input type="text" value="" name="q" id="s" class="bk dah" placeholder="Google" />
+						<input type="hidden" name="cx" value="017978609038208656401:uoerpecp-ug" />
+						<input type="hidden" name="ie" value="UTF-8" />
+						<button type="submit" id="searchsubmit" class="search-close bk da"><svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1785" width="200" height="200"><path d="M522.016 438.016v176h290.016c-12 76-88 222.016-290.016 222.016-174.016 0-318.016-146.016-318.016-324s144-324 318.016-324c100 0 166.016 44 204 80l140-134.016C776 50.016 660 0 522.016 0c-282.016 0-512 230.016-512 512 0 284 230.016 512 512 512 296 0 492-208 492-500 0-34.016-4-60-8-84z" p-id="1786"></path></svg></button>
+					</span>
+				</form>
+			</div>
+		
+				<div class="searchbar da">
+			<form method="get" id="searchform" action="https://www.bing.com/search" target="_blank">
+				<span class="search-input">
+					<input type="text" value="" name="q" id="s" class="bk dah" placeholder="Bing" />
+					<input type="hidden" name="q1" value="site:www.daniao.org">
+					<button type="submit" id="searchsubmit" class="bk da"><svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2107" width="200" height="200"><path d="M340.5824 70.109867L102.536533 0.682667v851.217066L340.650667 643.345067V70.109867zM102.536533 851.7632l238.045867 171.6224 580.881067-340.923733V411.784533L102.536533 851.831467z" p-id="2108"></path><path d="M409.463467 255.3856l113.732266 238.933333 138.8544 56.866134 259.413334-139.400534-506.0608-156.330666z" p-id="2109"></path></svg></button>
+				</span>
+			</form>
+		</div>
+		
+		
+				<div class="searchbar da">
+			<form action="https://www.sogou.com/web" target="_blank" name="sogou_queryform">
+				<span class="search-input">
+					<input type="text" placeholder="上网从搜狗开始" name="query" class="bk dah">
+					<button type="submit" id="sogou_submit" class="search-close bk da" onclick="check_insite_input(document.sogou_queryform, 1)"><svg class="icon soico" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2771" width="200" height="200"><path d="M975.3088 822.10816l-53.80096-52.57216-0.02048 0.01024c-33.6896 59.16672-81.5616 109.2096-139.02848 145.4592-0.06144 0.04096-0.12288 0.07168-0.18432 0.11264l50.50368 53.62688a486.668288 486.668288 0 0 0 142.53056-146.6368z" p-id="2772"></path><path d="M509.83936 924.75392C281.87648 924.75392 97.08544 739.96288 97.08544 512c0-227.96288 184.80128-412.75392 412.75392-412.75392S922.59328 284.03712 922.59328 512c0 74.16832-19.57888 143.75936-53.83168 203.90912l0.02048-0.01024 53.80096 52.57216C969.13408 694.09792 996.07552 606.208 996.07552 512c0-267.34592-216.7296-484.07552-484.07552-484.07552S27.92448 244.65408 27.92448 512 244.65408 996.07552 512 996.07552c99.14368 0 191.31392-29.82912 268.06272-80.96768l-50.50368-53.62688c-63.62112 40.07936-138.96704 63.27296-219.71968 63.27296z" p-id="2773"></path><path d="M785.05984 403.10784l4.46464-105.96352s-126.03392-60.78464-310.6304-60.23168c-184.59648 0.55296-255.97952 65.24928-253.7472 153.36448 2.23232 88.1152 132.73088 142.76608 221.96224 170.6496 89.23136 27.88352 157.26592 45.73184 156.14976 81.98144-1.11616 36.2496-45.86496 48.51712-91.24864 47.96416s-204.31872-30.6688-282.95168-92.57984l-3.95264 120.46336s155.648 75.84768 324.06528 70.83008c168.41728-5.0176 255.97952-73.05216 254.30016-156.14976S700.29312 497.92 593.7664 464.45568s-173.44512-53.53472-172.88192-91.46368 127.71328-72.4992 364.17536 30.11584z" p-id="2774"></path></svg></button>
+					<input type="hidden" name="insite" value="www.daniao.org">
+				</span>
+			</form>
+		</div>
+				<div class="clear"></div>
+
+				<nav class="search-nav hz">
+			<h4 class="hz">搜索热点</h4>
+			<div class="clear"></div>
+			<div class="menu-%e6%90%9c%e7%b4%a2%e6%8e%a8%e8%8d%90-container"><ul id="menu-%e6%90%9c%e7%b4%a2%e6%8e%a8%e8%8d%90" class="search-menu"><li id="menu-item-3419" class="menu-item menu-item-type-taxonomy menu-item-object-post_tag menu-item-3419"><a href="../tag/宝塔面板/index.html">宝塔面板</a></li>
+<li id="menu-item-3421" class="menu-item menu-item-type-taxonomy menu-item-object-post_tag menu-item-3421"><a href="../tag/自建cdn/index.html">自建CDN</a></li>
+<li id="menu-item-3422" class="menu-item menu-item-type-taxonomy menu-item-object-post_tag menu-item-3422"><a href="../tag/bt宝塔面板命令大全/index.html">Bt(宝塔面板)命令大全</a></li>
+<li id="menu-item-10928" class="menu-item menu-item-type-taxonomy menu-item-object-post_tag menu-item-10928"><a href="../tag/racknerd/index.html">RackNerd</a></li>
+<li id="menu-item-10929" class="menu-item menu-item-type-taxonomy menu-item-object-post_tag menu-item-10929"><a href="../tag/搬瓦工/index.html">搬瓦工</a></li>
+<li id="menu-item-10930" class="menu-item menu-item-type-taxonomy menu-item-object-post_tag menu-item-10930"><a href="../tag/腾讯云/index.html">腾讯云</a></li>
+<li id="menu-item-10931" class="menu-item menu-item-type-taxonomy menu-item-object-post_tag menu-item-10931"><a href="../tag/wordpress/index.html">WordPress</a></li>
+<li id="menu-item-10932" class="menu-item menu-item-type-taxonomy menu-item-object-post_tag menu-item-10932"><a href="../tag/pacificrack/index.html">PacificRack</a></li>
+<li id="menu-item-10933" class="menu-item menu-item-type-taxonomy menu-item-object-post_tag menu-item-10933"><a href="../tag/ucloud优惠/index.html">UCloud优惠</a></li>
+</ul></div>		</nav>
+				<div class="clear"></div>
+	</div>
+	<div class="off-search-b">
+		<div class="clear"></div>
+	</div>
+	<div class="off-search dah fadeInDown animated"></div>
+</div>		<nav class="bread">
+		<div class="be-bread">
+			<div class="breadcrumb"><span class="seat"></span><a href="https://www.daniao.org/" rel="bookmark">首页</a><i class="be be-arrowright"></i><span><a href="../wordpress/index.html">wordpress</a></span><i class="be be-arrowright"></i><span class="current">Bt(宝塔面板)安装wordpress以及如何开启最简单实用的动静分离优化！</span></div>		</div>
+	</nav>
+		<div class="header-sub">
+					<div class="tg-pc tg-site"><div style="margin: 0 0 5px 0;">
+<a href="../go/zji/index.html"  target="_blank" rel="nofollow"> 
+		<img src="../wp-content/uploads/2021/12/eezjj-1.jpg"></a>
+<div class="clear"></div>
+</div>
+<a href="../go/just/index.html"  target="_blank" rel="nofollow"> 
+		<img src="../wp-content/uploads/2022/01/just-ad-1.png"></a>
+</div>				<div class="clear"></div>
+	</div>
+
+
+	<div class="header-sub">
+				
+						<div class="clear"></div>
+	</div>
+	
+	<div class="header-sub">
+		<div id="header-widget" class="widget-sub-nav" data-aos=fade-up>
+						<div class="clear"></div>
+		</div>
+	</div>
+
+
+	
+	<div id="content" class="site-content site-small site-roll">
+				<div class="like-left-box fds">
+			<div class="like-left fadeInDown animated">			<div class="sharing-box" data-aos="zoom-in">
+	<a class="zmy-btn-beshare zmy-btn-donate use-beshare-donate-btn bk dah" rel="external nofollow" data-hover="打赏"><div class="arrow-share"></div></a>	<a class="zmy-btn-beshare zmy-btn-like use-beshare-like-btn bk dah" data-count="" rel="external nofollow">
+		<span class="sharetip bz like-number">
+			点赞		</span>
+		<div class="triangle-down"></div>
+	</a>	<span class="favorite-box show-layer" data-show-layer="login-layer"><a class="zmy-btn-beshare bk no-favorite dah" rel="external nofollow"><span class="like-number sharetip bz">登录收藏</span><div class="triangle-down"></div></a></span>	<a class="zmy-btn-beshare zmy-btn-share use-beshare-social-btn bk dah" rel="external nofollow" data-hover="分享"><div class="arrow-share"></div></a>			<span class="post-link">https://www.daniao.org/2590.html</span>
+								<a class="tooltip zmy-btn-beshare zmy-btn-link zmy-btn-link-b use-beshare-link-btn bk dah" rel="external nofollow" onclick="myFunction()" onmouseout="outFunc()"><span class="sharetip bz copytip">复制链接</span></a>
+			<a class="tooltip zmy-btn-beshare zmy-btn-link zmy-btn-link-l use-beshare-link-btn bk dah" rel="external nofollow" onclick="myFunction()" onmouseout="outFunc()"><span class="sharetip bz copytipl">复制链接</span></a>
+				<a class="zmy-btn-beshare zmy-share-poster use-beshare-poster-btn bk dah" rel="external nofollow" data-hover="海报"><div class="arrow-share"></div></a></div>
+	</div>
+		</div>
+	
+		<div id="primary" class="content-area meta-b">
+
+		<main id="main" class="site-main p-em" role="main">
+
+			
+				<article id="post-2590" data-aos=fade-up class="ms bk post-2590 post type-post status-publish format-standard has-post-thumbnail hentry category-wordpress tag-wordpress tag-167 tag-bt tag-memcachedbatcache hgk">
+		<header class="entry-header entry-header-c">
+									<h1 class="entry-title">Bt(宝塔面板)安装wordpress以及如何开启最简单实用的动静分离优化！</h1>						</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		
+						<div class="begin-single-meta begin-single-meta-c"><span class="my-date">2018年6月7日<i class="i-time">18:01:29</i></span><span class="meta-block"></span><span class="meta-cat"><i class="be be-sort ri"></i><a href="../wordpress/index.html" rel="category tag">wordpress</a></span><span class="comment"><a href="index.html#comments"><i class="be be-speechbubble ri"></i>31</a></span><span class="views"><i class="be be-eye ri"></i>34,648</span><span class="word-time"><span class="word-count">7714字</span></span><span class="reading-open">阅读模式</span></div><span class="reading-close bk dah"><i class="be be-cross"></i></span><span class="s-hide"><span class="off-side"></span></span>			
+							<div class="single-content">
+																<p>今天说的还是Bt(宝塔面板)方面的教程，我们都知道，利用wordpress建站，很方便，而且wordpress优化起来也很方便，相关的教程网上搜索下还是有很多的！我们用wordpress建好站点之后，首要的就是要给wordpress做优化，大鸟前面也有讲过教程。这里大鸟在简单的说一下！<img alt="Bt(宝塔面板)安装wordpress以及如何开启最简单实用的动静分离优化！" class="alignnone wp-image-2591" src="../wp-content/uploads/2018/06/0066LGKLly1frf8z6pthdj30v407eq4u.jpg" alt="小网站最简单实用的动静分离优化方案" width="947" height="225" /></p>
+<p>首页、你要安装缓存插件，比如说wp super cache、<a href="../tag/memcachedbatcache/index.html" target="_blank">memcached+Batcache</a>、Redis+Redis Object Cache 、Nginx ngx_cache_purge+Nginx Helper，这么几个最常用的网站缓存加速的方法的组合。当然这些方法大鸟也都写过教程，下面我都罗列出来，如果有需求，可以去研究一下。</p>
+<div class="mark_e mark"></p>
+<ol>
+<li><a href="../tag/memcachedbatcache/index.html" target="_blank">memcached+Batcache</a><strong><span style="color: #ff0000;">→</span></strong><a href="../2280.html/index.html" target="_blank">bt(宝塔)面板安装wordpress、启用memcached、Batcache让你的博客飞起来</a></li>
+<li>Redis+Redis Object Cach<strong><span style="color: #ff0000;">→</span></strong><a href="../2343.html/index.html" target="_blank">Bt（宝塔面板）安装wordpress并开启Redis加速</a></li>
+<li>Nginx ngx_cache_purge+Nginx Helper<strong><span style="color: #ff0000;">→</span></strong><a href="../436.html/index.html" target="_blank">Wdcp v3,v2启用Nginx fastcgi_cache缓存加速提高wordpress访问速度</a></li>
+</ol>
+<p></div>
+<p>大鸟推荐的是<a href="../tag/memcachedbatcache/index.html" target="_blank">memcached+Batcache</a>因为最简单，也最实用，也最好操作，大神水煮鱼也是推荐用memcached+Batcache这个组合来加速我们的wodpress！</p>
+<p>这些如果你选择一个做了，你会发现网站瞬间变的很快，如果我们用测速网站测试一下，会发现网站响应一片绿色，但是如果紧紧这样做个优化就放任不管，也是不够的，如果网站做大了一点，我们还要给wordpress网站做一个动静分离。当然，你可以选择七牛或者是又拍云来处理网站的静态资源！</p>
+<p>当然如果你不想这么做，可以看看大鸟分享的这篇文章，我们用最简单经济的方法来实现动静分离。毕竟大部分站长都是苦逼草根，能省一点就省一点吧，说了这么多最后就是想说，如何利用一台vps来实现偷懒的动静分离加速方法！</p>
+<div class='toc-box-h' name='toc-0'><h4 id='0' >第一：动静分离的简单优点</h4></div>
+<p>安装Bt(宝塔面板)，然后安装wordpress，然后开启安装memcached+Batcache这一整套的操作，大鸟就不去详解了，因为都有配套的教程，大家可以仔细研究一下。我们这里直接开始动静分离。</p>
+<p>首页说下原理，我们的网站简单来说分为 2 种数据资源，一种是动态的数据，即 PHP 等程序语言实时吐出来的数据，在网页内容上主要是 HTML 代码，另一种则是静态资源，比如图片、css、js、视频……</p>
+<p>那动静分离是什么样子的呢，大鸟举个列子，我们访问网站的时候，发现主域名是www.xxx.com，但是打开源代码的时候，发现图片啊，css等等这些都是img.xxx.com这种形式的，额，看起来是不是很专业，大鸟也是很羡慕啊。如果我们单独给img.xxx.com这个静态的资源域名加个cdn会不会很牛叉，网站速度肯定要飞起来了。</p>
+<p>1、因为这种静态二级域名，接入 CDN 之后，CDN 配置更加比较简单，完全不用考虑缓存规则的问题，因为直接设置成全部缓存就好了！简单粗暴。</p>
+<p>2、大鸟用一台服务器实现动静分离，节省成本。毕竟苦逼站长很多。</p>
+<p>3、解决主站直接使用一级域名带来的 cookies“污染”，即静态资源不会再带上主站的 cookies 数据，减小了体积。</p>
+<div class='toc-box-h' name='toc-1'><h4 id='1' >第二：新建一个网站然后反代到主站</h4></div>
+<p>额，我都说的有点乱了，下面看看如何实现吧。因为我们安装的Bt(宝塔面板)所以我们要在服务器上利用反向-代-理新增了一个新网站，内容则是反向-代-理了我们的主站，从而实现了 2 个域名共享相同的网站数据。就是说如果我的主站是www.xxx.com,然后我新增一个res.xxx.xom的二级域名，这个二级域名反向-代-理到我的主域名上，Bt(宝塔面板)来实现反代也是非常简单的，我们看看如何实现！</p>
+<p style="padding-left: 30px;"><strong>1、同服务器新建一个二级域名的网站</strong></p>
+<p style="padding-left: 30px;"><img alt="Bt(宝塔面板)安装wordpress以及如何开启最简单实用的动静分离优化！" loading="lazy" class="alignnone wp-image-2592" src="../wp-content/uploads/2018/06/方向代理bt面板.jpg" alt="方向代理bt面板" width="464" height="341" /></p>
+<p>我们提交就可以了，这样我们就新建好了一个二级域名的网站，然后用这个站方向代理到我们的主站上面！</p>
+<div class='toc-box-h' name='toc-2'><h4 id='2'  style="padding-left: 30px;">2、反向-代-理的部署</h4></div>
+<p>Bt(宝塔面板)来操作方向代理也是很简单，我们来看一下！<img alt="Bt(宝塔面板)安装wordpress以及如何开启最简单实用的动静分离优化！" loading="lazy" class="alignnone wp-image-2593" src="../wp-content/uploads/2018/06/Snipaste_2018-06-07_10-37-53.jpg" alt="小网站最简单实用的动静分离优化方案" width="525" height="466" /></p>
+<p>目标url这里填写我们的主域名，反向-代-理那个要选中！也可以开启缓存，也可以不开启，这个随意！</p>
+<div class='toc-box-h' name='toc-3'><h4 id='3' >第三：反向-代-理的网站部署vhost</h4></div>
+<p>反向-代-理做好之后，我们开始部署这个二级域名的vhost，不然无法开启动静分离，如何操作呢，请往下面看！</p>
+<p style="padding-left: 30px;"><strong>1、找到res.daniao.org 的conf配置文件</strong></p>
+<p>我们要编辑res.daniao.org.conf的配置文件，但是这个文件在哪里呢，我们找找看！我们可以在网站设置里面可以编辑，可是画面太小，不好操作啊，大鸟还是找到源文件操作比较好！</p>
+<p style="padding-left: 30px;"><strong>2、res.daniao.org.conf的源文件</strong></p>
+<p style="padding-left: 30px;"><img alt="Bt(宝塔面板)安装wordpress以及如何开启最简单实用的动静分离优化！" loading="lazy" class="alignnone wp-image-2594" src="../wp-content/uploads/2018/06/小网站最简单实用的动静分离优化方案.jpg" alt="小网站最简单实用的动静分离优化方案" width="576" height="275" /></p>
+<p>大鸟的res.daniao.org已经找到，我们在这里打开编辑！</p>
+<div class='toc-box-h' name='toc-4'><h4 id='4' >第四：开始真正的部署之旅</h4></div>
+<p>我擦，啰嗦这么多，要开始了么，是的这下开始了，我们现在开始编辑res.daniao.org这个conf配置文件。大鸟给出代码，直接复制即可！</p>
+<pre lang="html">server
+{
+    listen 80;
+    server_name img.daniao.org;
+    index index.php index.html index.htm default.php default.htm default.html;
+    root /www/wwwroot/www.daniao.org;
+  
+    #从这里复制图片等静态资源请求代理到本地主站（关键配置）
+      location ~* .*\.(js|css|png|jpeg|jpg|bmp|ico|ogg|ogv|svg|svgz|eot|otf|woff|woff2|mp4|ttf|rss|atom|zip|tgz|gz|rar|bz2|doc|xls|exe|ppt|tar|mid|midi|wav|bmp|rtf)$ {
+                add_header Access-Control-Allow-Origin *; #解决字体跨站问题    
+                add_header Access-Control-Allow-Headers X-Requested-With;
+                add_header Access-Control-Allow-Methods GET,OPTIONS;
+                proxy_pass http://127.0.0.1; # 如果是启用了https的网站，这里最好改成 https://127.0.0.1,避免主站加了非https协议的跳转配置，导致不成功。
+                proxy_set_header  X-Forwarded-For $remote_addr;
+                proxy_redirect off;
+                proxy_set_header Host www.daniao.org; # 这里改为实际主站域名（必须）
+                expires max;                       # 设置浏览器304缓存为最长期限
+        }
+        #为这个二级域名额外设置一个robots文件
+        location ~ (robots.txt) {
+                rewrite /robots.txt /resrobots.txt last;  #在网站根目录新增一个resrobots.txt，内容和七牛CDN类似，禁止搜索引擎抓取非静态资源
+        }
+        #如果通过静态域名访问的是非静态资源，比如访问了我们的文章页面，则跳到主站对应的页面。
+        location / {
+            if ( $request_uri !~* .*\.(js|css|png|jpeg|jpg|gif|bmp|ico|ogg|ogv|svg|svgz|eot|otf|woff|woff2|mp4|ttf|rss|atom|zip|tgz|gz|rar|bz2|doc|xls|exe|ppt|tar|mid|midi|wav|bmp|rtf))
+                {
+                rewrite ^(.*)$ $scheme://www.daniao.org$1 permanent; # www.daniao.org 修改为实际主站域名
+            }
+        }
+    
+    #复制到这里结束SSL-START SSL相关配置，请勿删除或修改下一行带注释的404规则
+    #error_page 404/404.html;
+
+    #SSL-END
+    
+    #ERROR-PAGE-START  错误页配置，可以注释、删除或修改
+    error_page 404 /404.html;
+    error_page 502 /502.html;
+    #ERROR-PAGE-END
+    
+    #PHP-INFO-START  PHP引用配置，可以注释或修改
+    #PROXY-START
+    location ~ /purge(/.*) { 
+        proxy_cache_purge cache_one $host$request_uri$is_args$args;
+        #access_log  /www/wwwlogs/img.daniao.org_purge_cache.log;
+    }
+  
+    location ~ .*\.(php|jsp|cgi|asp|aspx|flv|swf|xml)?$
+    {
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header REMOTE-HOST $remote_addr;
+        proxy_pass https://www.daniao.org;
+        
+    }
+    
+    location ~ .*\.(html|htm|png|gif|jpeg|jpg|bmp|js|css)?$
+    {
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header REMOTE-HOST $remote_addr;
+        proxy_pass https://www.daniao.org;
+        
+        #缓存相关配置
+        proxy_cache cache_one;
+        proxy_cache_key $host$request_uri$is_args$args;
+        proxy_cache_valid 200 304 301 302 1h;
+        
+        expires 24h;
+    }
+    #PROXY-END
+
+	include enable-php-70.conf;
+    #PHP-INFO-END
+    
+    #REWRITE-START URL重写规则引用,修改后将导致面板设置的伪静态规则失效
+    include /www/server/panel/vhost/rewrite/img.daniao.org.conf;
+    #REWRITE-END
+    
+    #禁止访问的文件或目录
+    location ~ ^/(\.user.ini|\.htaccess|\.git|\.svn|\.project|LICENSE|README.md)
+    {
+        return 404;
+    }
+    
+    #一键申请SSL证书验证目录相关设置
+    location ~ \.well-known{
+        allow all;
+    }
+    
+    access_log  /www/wwwlogs/img.daniao.org.log;
+    error_log  /www/wwwlogs/img.daniao.org.error.log;
+}
+</pre>
+<p>这样就在本地新增了和主站共用一份数据的二级域名，只提供静态资源访问，其他访问都跳到主站对应页面。这是大鸟的conf配置文件，直接复制即可，但是涉及到域名修改的请自行修改。其他的没什么变动只是加了一段代码看我标注的地方，大鸟在单独写出来！放的位置就安装大鸟这个位置来放。</p>
+<pre> # 图片等静态资源请求代理到本地主站（关键配置）
+    location ~* .*\.(js|css|png|jpeg|jpg|bmp|ico|ogg|ogv|svg|svgz|eot|otf|woff|woff2|mp4|ttf|rss|atom|zip|tgz|gz|rar|bz2|doc|xls|exe|ppt|tar|mid|midi|wav|bmp|rtf)$ {
+        add_header Access-Control-Allow-Origin *; # 解决字体跨站问题
+        add_header Access-Control-Allow-Headers X-Requested-With;
+        add_header Access-Control-Allow-Methods GET,OPTIONS;
+        proxy_pass http://127.0.0.1; # 如果是启用了https的网站，这里最好改成 https://127.0.0.1,避免主站加了非https协议的跳转配置，导致不成功。
+        proxy_set_header  X-Forwarded-For $remote_addr;
+        proxy_redirect off;
+        proxy_set_header Host www.daniao.org; # 这里改为实际主站域名（必须）
+        expires max;                       # 设置浏览器304缓存为最长期限
+        }
+     # 为这个二级域名额外设置一个robots文件
+     location ~ (robots.txt) {
+         rewrite /robots.txt /resrobots.txt last;  # 在网站根目录新增一个resrobots.txt，内容和七牛CDN类似，禁止搜索引擎抓取非静态资源
+        }
+     # 如果通过静态域名访问的是非静态资源，比如访问了我们的文章页面，则跳到主站对应的页面。
+     location / {
+         if ( $request_uri !~* .*\.(js|css|png|jpeg|jpg|gif|bmp|ico|ogg|ogv|svg|svgz|eot|otf|woff|woff2|mp4|ttf|rss|atom|zip|tgz|gz|rar|bz2|doc|xls|exe|ppt|tar|mid|midi|wav|bmp|rtf))
+                {
+         rewrite ^(.*)$ $scheme://www.daniao.org$1 permanent; # www.daniao.org 修改为实际主站域名
+          }
+        }
+</pre>
+<p>也不知道被转义了没有，大鸟也没安装个高亮的插件，如果有问题，给我留言，我从新发给你们！</p>
+<div class='toc-box-h' name='toc-5'><h4 id='5' >第五：网站的静态资源替换为这个新二级域名</h4></div>
+<p>完成新增后，将网站的静态资源替换为这个新二级域名，把下面的代码加到 functions.php 即可完成替换：</p>
+<pre>/**
+* WordPress CDN代码版 By 张戈博客
+* 以下代码引用自张戈博客
+* 原文地址：http://zhangge.net/4905.html
+**/
+function QiNiuCDN(){
+    function Rewrite_URI($html){
+        $domain = 'www\.daniao\.net';   //填写主站域名，小数点前需要加上反斜杠转义
+        $static = 'img.daniao.org'; //填写二级静态域名
+        //更多静态资源需要替换，可以将后缀加到后面的括号，使用分隔符分割
+        $html = preg_replace('/http(s|):\/\/'.$domain.'\/wp-([^"\']*?)\.(jpg|png|gif|bmp|jpeg|css|js)/i','//'.$static.'/wp-$2.$3',$html);
+        return $html;
+}
+    if(!is_admin()){
+        ob_start("Rewrite_URI");
+    }
+}
+add_action('init', 'QiNiuCDN');
+</pre>
+<p>完成部署后，我们网站的前台页面中的图片、js 等静态资源链接就全部换成了新的二级域名了。按张戈大神说的可以把这个二级域名接入 CDN 即可，接入方法就不啰嗦了，自己折腾吧！</p>
+<div class='toc-box-h' name='toc-6'><h4 id='6' >第六：nginx报错</h4></div>
+<p>额，我们会遇到问题，因为大鸟也遇到过，大鸟这里说一下解决方法。错误问题下面贴图出来了。反正都是类似的。<img alt="Bt(宝塔面板)安装wordpress以及如何开启最简单实用的动静分离优化！" loading="lazy" class="alignnone size-full wp-image-2607" src="../wp-content/uploads/2018/06/nginx-error.jpg" alt="nginx-error" width="354" height="176" /></p>
+<blockquote><p>nginx: [emerg] duplicate location "/" in /www/server/panel/vhost/nginx/res.iqu.la.conf:45<br />
+nginx: configuration file /www/server/nginx/conf/nginx.conf test failed</p></blockquote>
+<p>大鸟是这种报错，也就是conf配置文件的45行有错误！大鸟分析了下，发现是张戈大神的代码和Bt(宝塔面板)的配置文件有冲突，我们删除就好！</p>
+<pre>    location / 
+    {
+        proxy_pass https://www.daniao.org;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header REMOTE-HOST $remote_addr;
+                
+        #持久化连接相关配置
+        #proxy_connect_timeout 30s;
+        #proxy_read_timeout 86400s;
+        #proxy_send_timeout 30s;
+        #proxy_http_version 1.1;
+        #proxy_set_header Upgrade $http_upgrade;
+        #proxy_set_header Connection "upgrade";
+        
+        add_header X-Cache $upstream_cache_status;
+        
+        expires 12h;
+    }
+</pre>
+<p>把这一段删除就好了，请大家仔细找一下！删除之后保存就没有问题了。</p>
+<div class='toc-box-h' name='toc-7'><h4 id='7' >第七：resrobots.txt</h4></div>
+<p>别忘了在主网站的根目录新建个resrobots.txt然后把禁止蜘蛛抓取的代码复制进去。</p>
+<pre>User-agent: *
+Allow: /robots.txt
+Allow: /wp-content/
+Allow: /*.png*
+Allow: /*.jpg*
+Allow: /*.jpeg*
+Allow: /*.gif*
+Allow: /*.bmp*
+Allow: /*.ico*
+Allow: /*.js*
+Allow: /*.css*
+Disallow: /
+</pre>
+<div class='toc-box-h' name='toc-8'><h4 id='8' >总结</h4></div>
+<p>大鸟这里是Bt(宝塔面板)来做测试，并测试成功，其他面板大鸟没有做测试，这是一个非彻底的动静分离，也是偷懒的方法，但是实际使用中，最终效果的区别并不大。而且，我们有单独的域名来驱动静态文件，也可以套入cdn来进一步加速。大鸟没有开启Bt(宝塔面板)自带的缓存做测试，需要的同学可以开启缓存试试看！</p>
+<p>总之，整个教程都说完了，大鸟也是懵逼状态，能理解的就这么多，如果有问题，可以多交流，有错误欢迎指正！文章代码引用的原文地址：http://zhangge.net/4905.html，张戈大神应该用的是lnmp的一键安装包，如果同样的环境可以直接复制大神给出的代码。</p>
+<p>大鸟这里用的Bt(宝塔面板)安装wordpress然后开启了动静分离优化，其他面板仅作参考！</p>
+<p>做好了动静分离之后如果想接入CDN让速度更上一层楼的话，看看这篇文章：<a href="../2610.html/index.html" target="_blank">WordPress开启动静分离优化之后静态资源如何使用又拍云CDN加速</a></p>
+			</div>
+							<div class="turn-small"></div>				<div class="sharing-box" data-aos="zoom-in">
+	<a class="zmy-btn-beshare zmy-btn-donate use-beshare-donate-btn bk dah" rel="external nofollow" data-hover="打赏"><div class="arrow-share"></div></a>	<a class="zmy-btn-beshare zmy-btn-like use-beshare-like-btn bk dah" data-count="" rel="external nofollow">
+		<span class="sharetip bz like-number">
+			点赞		</span>
+		<div class="triangle-down"></div>
+	</a>	<span class="favorite-box show-layer" data-show-layer="login-layer"><a class="zmy-btn-beshare bk no-favorite dah" rel="external nofollow"><span class="like-number sharetip bz">登录收藏</span><div class="triangle-down"></div></a></span>	<a class="zmy-btn-beshare zmy-btn-share use-beshare-social-btn bk dah" rel="external nofollow" data-hover="分享"><div class="arrow-share"></div></a>			<span class="post-link">https://www.daniao.org/2590.html</span>
+								<a class="tooltip zmy-btn-beshare zmy-btn-link zmy-btn-link-b use-beshare-link-btn bk dah" rel="external nofollow" onclick="myFunction()" onmouseout="outFunc()"><span class="sharetip bz copytip">复制链接</span></a>
+			<a class="tooltip zmy-btn-beshare zmy-btn-link zmy-btn-link-l use-beshare-link-btn bk dah" rel="external nofollow" onclick="myFunction()" onmouseout="outFunc()"><span class="sharetip bz copytipl">复制链接</span></a>
+				<a class="zmy-btn-beshare zmy-share-poster use-beshare-poster-btn bk dah" rel="external nofollow" data-hover="海报"><div class="arrow-share"></div></a></div>
+				<div class="s-weixin-one bky" data-aos="zoom-in">
+	<div class="weimg-one bky">
+		<img src="../wp-content/uploads/2020/10/wxgzh-2.jpg" alt="weinxin" />
+		<div class="weixin-h"><strong>微信公众号</strong></div>
+		<div class="weixin-h-w">关注大鸟博客公众号</div>
+		<div class="clear"></div>
+	</div>
+</div>
+	
+	<div class="content-empty"></div>
+		<footer class="single-footer">
+		<div class="single-cat-tag dah"><div class="single-cat dah"><i class="be be-sort"></i><a href="../wordpress/index.html" rel="category tag">wordpress</a><span class="single-replace dah">最后更新：2019-12-16</span></div></div>	</footer>
+
+				<div class="clear"></div>
+	</div><!-- .entry-content -->
+
+	</article><!-- #post -->
+
+<div class="single-tag"><ul class="be-tags"><li data-aos="zoom-in"><a href="../tag/wordpress/index.html" rel="tag">WordPress</a></li><li data-aos="zoom-in"><a href="../tag/宝塔面板/index.html" rel="tag">宝塔面板</a></li><li data-aos="zoom-in"><a href="../tag/bt（宝塔面板）/index.html" rel="tag">Bt（宝塔面板）</a></li><li data-aos="zoom-in"><a href="../tag/memcachedbatcache/index.html" rel="tag">memcached+Batcache</a></li></ul></div>
+								<div class="slider-rolling-box ms bk" data-aos=fade-up>
+			<div id="slider-rolling" class="owl-carousel be-rolling single-rolling">
+									<div id="post-12169" class="scrolling-img post-12169 post type-post status-publish format-standard has-post-thumbnail hentry category-wordpress tag-wordpress hgk" >
+						<div class="scrolling-thumbnail"><a class="sc" rel="external nofollow" href="../12169.html/index.html"><img width="280" height="210" src="../wp-content/uploads/2021/01/WordPress-Acceleration-1-280x210.jpg" class="attachment-content size-content wp-post-image" alt="优化WordPress速度 – 使用Memcached缓存数据库加速WordPress网站" loading="lazy" /></a></div>
+						<div class="clear"></div>
+						<h2 class="grid-title over"><a href="../12169.html/index.html" rel="bookmark">优化WordPress速度 – 使用Memcached缓存数据库加速WordPress网站</a></h2>						<div class="clear"></div>
+					</div>
+									<div id="post-12038" class="scrolling-img post-12038 post type-post status-publish format-standard has-post-thumbnail hentry category-wordpress tag-wordpress tag-xmlrpc-php hgk" >
+						<div class="scrolling-thumbnail"><a class="sc" rel="external nofollow" href="../12038.html"><img width="280" height="210" src="../wp-content/uploads/2021/01/wp-pass-7-280x210.jpg" class="attachment-content size-content wp-post-image" alt="WordPress的管理员用户名是如何泄露的，以及如何防护~" loading="lazy" /></a></div>
+						<div class="clear"></div>
+						<h2 class="grid-title over"><a href="../12038.html" rel="bookmark">WordPress的管理员用户名是如何泄露的，以及如何防护~</a></h2>						<div class="clear"></div>
+					</div>
+									<div id="post-11770" class="scrolling-img post-11770 post type-post status-publish format-standard has-post-thumbnail hentry category-wordpress category-btpanel hgk" >
+						<div class="scrolling-thumbnail"><a class="sc" rel="external nofollow" href="../11770.html"><img width="280" height="210" src="../wp-content/uploads/2020/12/wp-u-3-280x210.png" class="attachment-content size-content wp-post-image" alt="宝塔面板安装wordpress：设置图片目录不允许执行PHP" loading="lazy" /></a></div>
+						<div class="clear"></div>
+						<h2 class="grid-title over"><a href="../11770.html" rel="bookmark">宝塔面板安装wordpress：设置图片目录不允许执行PHP</a></h2>						<div class="clear"></div>
+					</div>
+									<div id="post-11095" class="scrolling-img post-11095 post type-post status-publish format-standard has-post-thumbnail hentry category-wordpress tag-wordpress tag-memcached tag-nginx tag-php tag-centos8wordpress tag-centos8 tag-mariadb tag-certbot hgk" >
+						<div class="scrolling-thumbnail"><a class="sc" rel="external nofollow" href="../11095.html/index.html"><img width="280" height="210" src="../wp-content/uploads/2020/10/centos8-wordpress-3-280x210.png" class="attachment-content size-content wp-post-image" alt="CentOS8手动部署WordPress &#8211; Memcached+MariaDB+PHP+Nginx+CertBOT" loading="lazy" /></a></div>
+						<div class="clear"></div>
+						<h2 class="grid-title over"><a href="../11095.html/index.html" rel="bookmark">CentOS8手动部署WordPress &#8211; Memcached+MariaDB+PHP+Nginx+CertBOT</a></h2>						<div class="clear"></div>
+					</div>
+									<div id="post-11082" class="scrolling-img post-11082 post type-post status-publish format-standard has-post-thumbnail hentry category-wordpress category-btpanel tag-167 tag-3254 tag-wordpress tag-3256 hgk" >
+						<div class="scrolling-thumbnail"><a class="sc" rel="external nofollow" href="../11082.html"><img width="280" height="210" src="../wp-content/uploads/2020/10/bt-fzjh-1-280x210.png" class="attachment-content size-content wp-post-image" alt="宝塔面板+wordpress折腾负载均衡 &#8211; 负载均衡插件的正确使用指南" loading="lazy" /></a></div>
+						<div class="clear"></div>
+						<h2 class="grid-title over"><a href="../11082.html" rel="bookmark">宝塔面板+wordpress折腾负载均衡 &#8211; 负载均衡插件的正确使用指南</a></h2>						<div class="clear"></div>
+					</div>
+									<div id="post-10717" class="scrolling-img post-10717 post type-post status-publish format-standard has-post-thumbnail hentry category-wordpress category-btpanel tag-wordpress tag-167 tag-openlitespeed tag-litespeed tag-litespeed-lscache tag-lscacheredis tag-lscache hgk" >
+						<div class="scrolling-thumbnail"><a class="sc" rel="external nofollow" href="../10717.html/index.html"><img width="280" height="210" src="../wp-content/uploads/2020/09/bt-test-18-min-280x210.png" class="attachment-content size-content wp-post-image" alt="宝塔面板+Litespeed+ wordpress+ LSCache+Redis 这样优化wp的速度会不会更快？" loading="lazy" /></a></div>
+						<div class="clear"></div>
+						<h2 class="grid-title over"><a href="../10717.html/index.html" rel="bookmark">宝塔面板+Litespeed+ wordpress+ LSCache+Redis 这样优化wp的速度会不会更快？</a></h2>						<div class="clear"></div>
+					</div>
+									<div id="post-10612" class="scrolling-img post-10612 post type-post status-publish format-standard has-post-thumbnail hentry category-wordpress tag-wordpress tag-crayon-syntax-highlighter hgk" >
+						<div class="scrolling-thumbnail"><a class="sc" rel="external nofollow" href="../10612.html/index.html"><img width="280" height="210" src="../wp-content/uploads/2020/09/Crayon-Syntax-Highlighter-4-280x210.png" class="attachment-content size-content wp-post-image" alt="wordpress代码高亮插件Crayon Syntax Highlighter在PHP7.4报错解决办法" loading="lazy" /></a></div>
+						<div class="clear"></div>
+						<h2 class="grid-title over"><a href="../10612.html/index.html" rel="bookmark">wordpress代码高亮插件Crayon Syntax Highlighter在PHP7.4报错解决办法</a></h2>						<div class="clear"></div>
+					</div>
+									<div id="post-10498" class="scrolling-img post-10498 post type-post status-publish format-standard has-post-thumbnail hentry category-wordpress tag-wordpress tag-167 tag-redis tag-3003 hgk" >
+						<div class="scrolling-thumbnail"><a class="sc" rel="external nofollow" href="../10498.html"><img width="280" height="210" src="../wp-content/uploads/2020/08/wp-redis-6-280x210.jpg" class="attachment-content size-content wp-post-image" alt="优化WordPress速度 &#8211; 使用Redis缓存数据库加速WordPress网站" loading="lazy" /></a></div>
+						<div class="clear"></div>
+						<h2 class="grid-title over"><a href="../10498.html" rel="bookmark">优化WordPress速度 &#8211; 使用Redis缓存数据库加速WordPress网站</a></h2>						<div class="clear"></div>
+					</div>
+									<div id="post-10374" class="scrolling-img post-10374 post type-post status-publish format-standard has-post-thumbnail hentry category-wordpress tag-1297 tag-wordpres hgk" >
+						<div class="scrolling-thumbnail"><a class="sc" rel="external nofollow" href="../10374.html/index.html"><img width="280" height="210" src="../wp-content/uploads/2020/08/begin-zming-1-280x210.png" class="attachment-content size-content wp-post-image" alt="知更鸟主题修改CSS：让凌乱的标签变得整洁清爽" loading="lazy" /></a></div>
+						<div class="clear"></div>
+						<h2 class="grid-title over"><a href="../10374.html/index.html" rel="bookmark">知更鸟主题修改CSS：让凌乱的标签变得整洁清爽</a></h2>						<div class="clear"></div>
+					</div>
+									<div id="post-10257" class="scrolling-img post-10257 post type-post status-publish format-standard has-post-thumbnail hentry category-wordpress category-btpanel tag-wordpress tag-167 tag-2911 hgk" >
+						<div class="scrolling-thumbnail"><a class="sc" rel="external nofollow" href="../10257.html/index.html"><img width="280" height="210" src="../wp-content/uploads/2020/08/bt-bt-ad-12-280x210.png" class="attachment-content size-content wp-post-image" alt="宝塔面板 &#8211; 堡塔网站加速wordpress的简单体验" loading="lazy" /></a></div>
+						<div class="clear"></div>
+						<h2 class="grid-title over"><a href="../10257.html/index.html" rel="bookmark">宝塔面板 &#8211; 堡塔网站加速wordpress的简单体验</a></h2>						<div class="clear"></div>
+					</div>
+											</div>
+		</div>
+	
+									<div class="authorbio ms bk load" data-aos=fade-up>
+					<img alt='大鸟' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='https://www.daniao.org/wp-content/uploads/avatar/4300d99c5105ba50757d2f89ec6c5c2a96.png' class='avatar avatar-96 photo' height='96' width='96' />				<ul class="spostinfo">
+										<li class="reprinted">除非特殊声明，本站文章均为原创，转载请务必保留本文链接</li>
+						<li class="reprinted"><a href="index.html">Bt(宝塔面板)安装wordpress以及如何开启最简单实用的动静分离优化！</a></li>
+			</ul>
+	<div class="clear"></div>
+</div>
+				
+				<nav class="post-nav-img" data-aos=fade-up>
+					<div class="nav-img-box post-previous-box ms bk hz">
+					<figure class="nav-thumbnail"><span class="load"><a class="sc" rel="external nofollow" href="../2586.html/index.html"><img src="../wp-content/themes/begin/prune.php?src=https:%252F%252Fwww.daniao.org%252Fwp-content%252Fthemes%252Fbegin%252Fimg%252Floading.png&amp;w=280&amp;h=210&amp;a=&amp;zc=1" data-original="https://www.daniao.org/wp-content/uploads/2017/04/btcn.jpg" alt="Bt（宝塔面板）phpmyadmin打不开的解决办法" width="280" height="210" ></a></span></figure>
+					<a href="../2586.html/index.html">
+						<div class="nav-img post-previous-img">
+							<div class="post-nav">上一篇</div>
+							<div class="nav-img-t">Bt（宝塔面板）phpmyadmin打不开的解决办法</div>
+						</div>
+					</a>
+				</div>
+								<div class="nav-img-box post-next-box ms bk">
+					<figure class="nav-thumbnail"><span class="load"><a class="sc" rel="external nofollow" href="../2610.html/index.html"><img src="../wp-content/themes/begin/prune.php?src=https:%252F%252Fwww.daniao.org%252Fwp-content%252Fthemes%252Fbegin%252Fimg%252Floading.png&amp;w=280&amp;h=210&amp;a=&amp;zc=1" data-original="https://www.daniao.org/wp-content/uploads/2018/06/UPYUN.jpg" alt="WordPress开启动静分离优化之后静态资源如何使用又拍云CDN加速" width="280" height="210" ></a></span></figure>
+					<a href="../2610.html/index.html">
+						<div class="nav-img post-next-img">
+							<div class="post-nav">下一篇</div>
+							<div class="nav-img-t">WordPress开启动静分离优化之后静态资源如何使用又拍云CDN加速</div>
+						</div>
+					</a>
+				</div>
+					<div class="clear"></div>
+</nav>
+
+				
+				
+				<div id="single-widget">
+	<div class="single-wt" data-aos=fade-up>
+		<aside id="related_post-3" class="widget related_post ms bk" data-aos="fade-up"><h3 class="widget-title bkx da"><span class="s-icon"></span><span class="title-i"><span></span><span></span><span></span><span></span></span>相关文章</h3>
+<div class="post_cat">
+			<ul>
+		
+							<li class="srm"><a href="../16520.html/index.html" rel="bookmark">宝塔面板docker安装umami</a></li>
+			
+		
+							<li class="srm"><a href="../16480.html" rel="bookmark">aapanel安装Flarum正式版</a></li>
+			
+		
+							<li class="srm"><a href="../5422.html/index.html" rel="bookmark">宝塔面板安装 EasyImag &#8211; 一款最简单图床的安装体验</a></li>
+			
+		
+							<li class="srm"><a href="../16266.html" rel="bookmark">宝塔面板安装网址缩短程序Polr</a></li>
+			
+		
+							<li class="srm"><a href="../15986.html/index.html" rel="bookmark">宝塔面板7.8无缝转为宝塔国际版aapanel，附宝塔7.8降级为宝塔7.7</a></li>
+			
+			</ul>
+</div>
+
+<div class="clear"></div></aside><aside id="hot_comment-4" class="widget hot_comment ms bk" data-aos="fade-up"><h3 class="widget-title bkx da"><span class="s-icon"></span><span class="title-i"><span></span><span></span><span></span><span></span></span>热评文章</h3>
+<div id="hot_comment_widget" class="widget-li-icon">
+			<ul>
+					
+<li class='srm'><span class='li-icon li-icon-1'>1</span><a href= "../16520.html/index.html" rel="bookmark" title=" (14条评论)" >宝塔面板docker安装umami</a></li>
+<li class='srm'><span class='li-icon li-icon-2'>2</span><a href= "../5422.html/index.html" rel="bookmark" title=" (11条评论)" >宝塔面板安装 EasyImag - 一款最简单图床的安装体验</a></li>
+<li class='srm'><span class='li-icon li-icon-3'>3</span><a href= "../12863.html/index.html" rel="bookmark" title=" (8条评论)" >BuyVM：VPS/块存储补货通知 - AMD高性能VPS+超便宜块存储+1Gbps带宽(不限流量)，有Windows</a></li>
+<li class='srm'><span class='li-icon li-icon-4'>4</span><a href= "../16643.html/index.html" rel="bookmark" title=" (7条评论)" >Virmach AMD Ryzen+NVMe系列VPS促销，低至$30/2年(1核/768M内存/20GNVMe/1T@2T流量)</a></li>
+<li class='srm'><span class='li-icon li-icon-5'>5</span><a href= "../16679.html/index.html" rel="bookmark" title=" (4条评论)" >Virmach日本东京机房的VPS(AMD+NVMe SSD)测评分享</a></li>					</ul>
+</div>
+
+<div class="clear"></div></aside>	</div>
+	<div class="clear"></div>
+</div>
+
+				
+				
+				<div class="scroll-comments"></div>
+<!-- 引用 -->
+
+<div id="comments" class="comments-area">
+			<div id="respond" class="comment-respond ms bk da" data-aos=fade-up>
+							<form action="https://www.daniao.org/wp-comments-post.php" method="post" id="commentform">
+											<div class="comment-user-inf">
+															<div class="user-avatar load">
+																		<img alt="匿名" src="data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-original="">
+								</div>
+														<div class="comment-user-inc">
+								<h3 id="reply-title" class="comment-reply-title">
+									<span>发表评论</span>
+								</h3>
+								<span class="comment-user-name">匿名网友</span>
+								<span class="comment-user-alter"></span>
+							</div>
+						</div>
+					
+					
+					<div class="comment-form-comment">
+													<textarea id="comment" class="da" name="comment" rows="4" tabindex="1" placeholder="评论人工审核，如果捉急的可以入群找站长。" onfocus="this.placeholder=''" onblur="this.placeholder='评论人工审核，如果捉急的可以入群找站长。'"></textarea>
+												<p class="comment-tool bgt">
+							<a class="tool-img bgt bky" href='javascript:embedImage();' title="插入图片"><i class="icon-img"></i><i class="be be-picture"></i></a>							<a class="emoji bgt bky" href="index.html" title="插入表情"><i class="be be-insertemoticon"></i></a>															<p class="emoji-box">
+									<script type="text/javascript">
+function grin(obj) { 
+	var val = document.getElementById('comment').value; 
+	document.getElementById('comment').value = val + " " + obj + " "; 
+}
+</script>
+
+<a href="javascript:grin(':?:')"><img src="../wp-content/themes/begin/img/smilies/icon_question.gif" alt=":?:" title="疑问" /></a>
+<a href="javascript:grin(':razz:')"><img src="../wp-content/themes/begin/img/smilies/icon_razz.gif" alt=":razz:" title="调皮" /></a>
+<a href="javascript:grin(':sad:')"><img src="../wp-content/themes/begin/img/smilies/icon_sad.gif" alt=":sad:" title="难过" /></a>
+<a href="javascript:grin(':evil:')"><img src="../wp-content/themes/begin/img/smilies/icon_evil.gif" alt=":evil:" title="抠鼻" /></a>
+<a href="javascript:grin(':!:')"><img src="../wp-content/themes/begin/img/smilies/icon_exclaim.gif" alt=":!:" title="吓" /></a>
+<a href="javascript:grin(':smile:')"><img src="../wp-content/themes/begin/img/smilies/icon_smile.gif" alt=":smile:" title="微笑" /></a>
+<a href="javascript:grin(':oops:')"><img src="../wp-content/themes/begin/img/smilies/icon_redface.gif" alt=":oops:" title="憨笑" /></a>
+<a href="javascript:grin(':grin:')"><img src="../wp-content/themes/begin/img/smilies/icon_biggrin.gif" alt=":grin:" title="坏笑" /></a>
+<a href="javascript:grin(':eek:')"><img src="../wp-content/themes/begin/img/smilies/icon_surprised.gif" alt=":eek:" title="惊讶" /></a>
+<a href="javascript:grin(':shock:')"><img src="../wp-content/themes/begin/img/smilies/icon_eek.gif" alt=":shock:" title="发呆" /></a>
+<a href="javascript:grin(':???:')"><img src="../wp-content/themes/begin/img/smilies/icon_confused.gif" alt=":???:" title="撇嘴" /></a>
+<a href="javascript:grin(':cool:')"><img src="../wp-content/themes/begin/img/smilies/icon_cool.gif" alt=":cool:" title="大兵" /></a>
+<a href="javascript:grin(':lol:')"><img src="../wp-content/themes/begin/img/smilies/icon_lol.gif" alt=":lol:" title="偷笑" /></a>
+<a href="javascript:grin(':mad:')"><img src="../wp-content/themes/begin/img/smilies/icon_mad.gif" alt=":mad:" title="咒骂" /></a>
+<a href="javascript:grin(':twisted:')"><img src="../wp-content/themes/begin/img/smilies/icon_twisted.gif" alt=":twisted:" title="发怒" /></a>
+<a href="javascript:grin(':roll:')"><img src="../wp-content/themes/begin/img/smilies/icon_rolleyes.gif" alt=":roll:" title="白眼" /></a>
+<a href="javascript:grin(':wink:')"><img src="../wp-content/themes/begin/img/smilies/icon_wink.gif" alt=":wink:" title="鼓掌" /></a>
+<a href="javascript:grin(':idea:')"><img src="../wp-content/themes/begin/img/smilies/icon_idea.gif" alt=":idea:" title="酷" /></a>
+<a href="javascript:grin(':arrow:')"><img src="../wp-content/themes/begin/img/smilies/icon_arrow.gif" alt=":arrow:" title="擦汗" /></a>
+<a href="javascript:grin(':neutral:')"><img src="../wp-content/themes/begin/img/smilies/icon_neutral.gif" alt=":neutral:" title="亲亲" /></a>
+<a href="javascript:grin(':cry:')"><img src="../wp-content/themes/begin/img/smilies/icon_cry.gif" alt=":cry:" title="大哭" /></a>
+<a href="javascript:grin(':mrgreen:')"><img src="../wp-content/themes/begin/img/smilies/icon_mrgreen.gif" alt=":mrgreen:" title="呲牙" /></a>
+<br />								</p>
+																						<div class="add-img-box yy da bk">
+								<div class="add-img-main">
+									<div><textarea class="img-url dah bk" rows="3" placeholder="插入图片地址" value=" + "/></textarea></div>
+									<div class="add-img-but bk dah">确定</div>
+									<span class="arrow-down"></span>
+								</div>
+								</div>
+													</p>
+					</div>
+
+											<div id="comment-author-info" class="comment-info">
+							<p class="comment-form-author pcd">
+								<label class="bk da" for="author">昵称</span></label>
+								<input type="text" name="author" id="author" class="commenttext da" value="" tabindex="2" required="required" />
+								<span class="required bgt"><i class="be be-loader"></i>							</p>
+															<p class="comment-form-email pcd">
+									<label class="bk da" for="email">邮箱</label>
+									<input type="text" name="email" id="email" class="commenttext da" value="" tabindex="3" required="required" />
+									<span class="required bgt"><i class="be be-loader"></i></span>
+								</p>
+																													<div class="clear"></div>
+						</div>
+					
+					<p class="form-submit">
+						<input id="submit" class="bk dah" name="submit" type="submit" tabindex="5" value="提交"/>
+					</p>
+
+					<div class="cancel-reply"><a rel="nofollow" id="cancel-comment-reply-link" href="index.html#respond" style="display:none;">&nbsp;</a></div>
+
+											<div class="qaptcha-box">
+							<div class="unlocktip" data-hover="滑动解锁"></div>
+							<div class="qaptcha"></div>
+						</div>
+					
+					<input type='hidden' name='comment_post_ID' value='2590' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+				</form>
+
+	 				</div>
+	
+	
+	
+				<div class="comments-title ms bk" data-aos=fade-up>
+			评论：31 &nbsp;&nbsp;其中：访客&nbsp;&nbsp;26 &nbsp;&nbsp;博主&nbsp;&nbsp;5  					</div>
+		
+		<ol class="comment-list">
+
+							
+	<li class="comments-anchor"><ul id="anchor-comment-1027"></ul></li>
+	<li class="comment even thread-even depth-1 ms bk da" id="comment-1027" data-aos=fade-up>
+			<div id="div-comment-1027" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='l2s' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='https://www.daniao.org/wp-content/uploads/avatar/8296190b097978c04e4300163109f3be96.png' class='avatar avatar-96 photo' height='96' width='96' />							</div>
+		
+		<strong>l2s</strong>
+				<a class="vip vip1" title="评论达人 VIP.1"><i class="be be-favorite"></i><span class="lv">1</span></a>		<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-1027"></a><br />
+			<span class="comment-aux">
+				2018年12月6日				<span class="comment-time">下午10:35</span>
+				
+				
+									<span class="floor">
+						<span class='floor-c floor-s'><i>1</i>F</span>											</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-1027' onclick='return addComment.moveForm( "div-comment-1027", "1027", "respond", "2590" )' aria-label='回复给l2s'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p>大鸟，张戈那里是这样写的：最后强调说明一下，本文说的 robots 是适用于只存放图片等静态文件的二级域名（比如：res.zhangge.net）！别乱用到主站的 robots，被 K 站了别来哭哦！</p>
+			</div>
+	</li><!-- #comment-## -->
+
+	<li class="comments-anchor"><ul id="anchor-comment-1028"></ul></li>
+	<li class="comment odd alt thread-odd thread-alt depth-1 parent ms bk da" id="comment-1028" data-aos=fade-up>
+			<div id="div-comment-1028" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='l2s' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='https://www.daniao.org/wp-content/uploads/avatar/8296190b097978c04e4300163109f3be96.png' class='avatar avatar-96 photo' height='96' width='96' />							</div>
+		
+		<strong>l2s</strong>
+				<a class="vip vip1" title="评论达人 VIP.1"><i class="be be-favorite"></i><span class="lv">1</span></a>		<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-1028"></a><br />
+			<span class="comment-aux">
+				2018年12月6日				<span class="comment-time">下午10:55</span>
+				
+				
+									<span class="floor">
+						<span class='floor-c floor-b'><i>2</i>F</span>											</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-1028' onclick='return addComment.moveForm( "div-comment-1028", "1028", "respond", "2590" )' aria-label='回复给l2s'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p>是我看错了，您是对的</p>
+			</div>
+	<ul class="children">
+
+	<li class="comments-anchor"><ul id="anchor-comment-1029"></ul></li>
+	<li class="comment byuser bypostauthor even depth-2 ms bk da" id="comment-1029" data-aos=fade-up>
+			<div id="div-comment-1029" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='大鸟' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='https://www.daniao.org/wp-content/uploads/avatar/e1a50789ccaf0418c30417205c17c7a196.png' class='avatar avatar-96 photo' height='96' width='96' />							</div>
+		
+		<strong>大鸟</strong>
+		<span class="author-mark post-author"><i class="be be-personoutline" title="作者"></i></span>				<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-1029"></a><br />
+			<span class="comment-aux">
+				2018年12月7日				<span class="comment-time">下午12:19</span>
+				
+				
+									<span class="floor">
+												<span class="floor-c floor-l floor-l-b">B1</span>					</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-1029' onclick='return addComment.moveForm( "div-comment-1029", "1029", "respond", "2590" )' aria-label='回复给大鸟'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p><span class="at">@ <a href="index.html#comment-1028">l2s</a></span> 感谢你的认真回复，可以多交流。</p>
+			</div>
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li class="comments-anchor"><ul id="anchor-comment-1115"></ul></li>
+	<li class="comment odd alt thread-even depth-1 parent ms bk da" id="comment-1115" data-aos=fade-up>
+			<div id="div-comment-1115" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='风铃君' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='' class='avatar avatar-96 photo letter' height='96' width='96' />							</div>
+		
+		<strong><a href="http://www.." rel="external nofollow" target="_blank" rel='external nofollow ugc' class='url'>风铃君</a></strong>
+				<a class="vip vip1" title="评论达人 VIP.1"><i class="be be-favorite"></i><span class="lv">1</span></a>		<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-1115"></a><br />
+			<span class="comment-aux">
+				2019年3月20日				<span class="comment-time">下午12:28</span>
+				
+				
+									<span class="floor">
+						<span class='floor-c floor-d'><i>3</i>F</span>											</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-1115' onclick='return addComment.moveForm( "div-comment-1115", "1115", "respond", "2590" )' aria-label='回复给风铃君'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p>大鸟你好，我按照教程做了一遍，出现了一个问题。我在没有https的域名上可以正常部署，到了主站上有https我所有的图片和css样式都就无法加载了。这个是哪里出了问题呢？</p>
+			</div>
+	<ul class="children">
+
+	<li class="comments-anchor"><ul id="anchor-comment-1117"></ul></li>
+	<li class="comment byuser bypostauthor even depth-2 ms bk da" id="comment-1117" data-aos=fade-up>
+			<div id="div-comment-1117" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='大鸟' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='https://www.daniao.org/wp-content/uploads/avatar/e1a50789ccaf0418c30417205c17c7a196.png' class='avatar avatar-96 photo' height='96' width='96' />							</div>
+		
+		<strong>大鸟</strong>
+		<span class="author-mark post-author"><i class="be be-personoutline" title="作者"></i></span>				<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-1117"></a><br />
+			<span class="comment-aux">
+				2019年3月20日				<span class="comment-time">下午3:35</span>
+				
+				
+									<span class="floor">
+												<span class="floor-c floor-l floor-l-b">B1</span>					</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-1117' onclick='return addComment.moveForm( "div-comment-1117", "1117", "respond", "2590" )' aria-label='回复给大鸟'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p><span class="at">@ <a href="index.html#comment-1115">风铃君</a></span> https://127.0.0.1; # 如果是启用了https的网站，这里最好改成 https://127.0.0.1,避免主站加了非https协议的跳转配置，导致不成功。这里改下，即可！</p>
+			</div>
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li class="comments-anchor"><ul id="anchor-comment-1252"></ul></li>
+	<li class="comment odd alt thread-odd thread-alt depth-1 parent ms bk da" id="comment-1252" data-aos=fade-up>
+			<div id="div-comment-1252" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='小白' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='https://www.daniao.org/wp-content/uploads/avatar/523ada2b4e42eed66188cdda3d944f3196.png' class='avatar avatar-96 photo' height='96' width='96' />							</div>
+		
+		<strong>小白</strong>
+				<a class="vip vip2" title="评论达人 VIP.2"><i class="be be-favorite"></i><span class="lv">2</span></a>		<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-1252"></a><br />
+			<span class="comment-aux">
+				2019年4月23日				<span class="comment-time">下午5:14</span>
+				
+				
+									<span class="floor">
+						<span class="floor-c floor-l"><i>4</i>F</span>											</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-1252' onclick='return addComment.moveForm( "div-comment-1252", "1252", "respond", "2590" )' aria-label='回复给小白'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p>这个方法很好，但是我的WordPress是多站点呀，怎么使用该方法呢？只有一个能使用反向代理，其他的二级域怎么解决，有方法吗？谢谢！</p>
+			</div>
+	<ul class="children">
+
+	<li class="comments-anchor"><ul id="anchor-comment-1253"></ul></li>
+	<li class="comment byuser bypostauthor even depth-2 parent ms bk da" id="comment-1253" data-aos=fade-up>
+			<div id="div-comment-1253" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='大鸟' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='https://www.daniao.org/wp-content/uploads/avatar/e1a50789ccaf0418c30417205c17c7a196.png' class='avatar avatar-96 photo' height='96' width='96' />							</div>
+		
+		<strong>大鸟</strong>
+		<span class="author-mark post-author"><i class="be be-personoutline" title="作者"></i></span>				<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-1253"></a><br />
+			<span class="comment-aux">
+				2019年4月23日				<span class="comment-time">下午5:35</span>
+				
+				
+									<span class="floor">
+												<span class="floor-c floor-l floor-l-b">B1</span>					</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-1253' onclick='return addComment.moveForm( "div-comment-1253", "1253", "respond", "2590" )' aria-label='回复给大鸟'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p><span class="at">@ <a href="index.html#comment-1252">小白</a></span> 这个目前只适合一个站点的，乞丐版的方法。你的二级域名是站点里面的二级域名还是一个新的二级域名站点？</p>
+			</div>
+	<ul class="children">
+
+	<li class="comments-anchor"><ul id="anchor-comment-1254"></ul></li>
+	<li class="comment odd alt depth-3 parent ms bk da" id="comment-1254" data-aos=fade-up>
+			<div id="div-comment-1254" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='小白' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='https://www.daniao.org/wp-content/uploads/avatar/523ada2b4e42eed66188cdda3d944f3196.png' class='avatar avatar-96 photo' height='96' width='96' />							</div>
+		
+		<strong>小白</strong>
+				<a class="vip vip2" title="评论达人 VIP.2"><i class="be be-favorite"></i><span class="lv">2</span></a>		<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-1254"></a><br />
+			<span class="comment-aux">
+				2019年4月23日				<span class="comment-time">下午5:44</span>
+				
+				
+									<span class="floor">
+												<span class="floor-c floor-l floor-l-b">B2</span>					</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-1254' onclick='return addComment.moveForm( "div-comment-1254", "1254", "respond", "2590" )' aria-label='回复给小白'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p><span class="at">@ <a href="index.html#comment-1253">大鸟</a></span> 站点里的二级域名，就是同个顶级域下面的</p>
+			</div>
+	<ul class="children">
+
+	<li class="comments-anchor"><ul id="anchor-comment-1259"></ul></li>
+	<li class="comment byuser bypostauthor even depth-4 ms bk da" id="comment-1259" data-aos=fade-up>
+			<div id="div-comment-1259" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='大鸟' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='https://www.daniao.org/wp-content/uploads/avatar/e1a50789ccaf0418c30417205c17c7a196.png' class='avatar avatar-96 photo' height='96' width='96' />							</div>
+		
+		<strong>大鸟</strong>
+		<span class="author-mark post-author"><i class="be be-personoutline" title="作者"></i></span>				<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-1259"></a><br />
+			<span class="comment-aux">
+				2019年4月23日				<span class="comment-time">下午8:20</span>
+				
+				
+									<span class="floor">
+												<span class="floor-c floor-l floor-l-b">B3</span>					</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-1259' onclick='return addComment.moveForm( "div-comment-1259", "1259", "respond", "2590" )' aria-label='回复给大鸟'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p><span class="at">@ <a href="index.html#comment-1254">小白</a></span> 如果是静态资源可以自己托管，或者同样反代过去啊！</p>
+			</div>
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li class="comments-anchor"><ul id="anchor-comment-1290"></ul></li>
+	<li class="comment odd alt thread-even depth-1 parent ms bk da" id="comment-1290" data-aos=fade-up>
+			<div id="div-comment-1290" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='Tostring' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='https://www.daniao.org/wp-content/uploads/avatar/7f118ee6eb50f31db20d0da70a101a4b96.png' class='avatar avatar-96 photo' height='96' width='96' />							</div>
+		
+		<strong>Tostring</strong>
+				<a class="vip vip0" title="评论达人 VIP.0"><i class="be be-favoriteoutline"></i><span class="lv">0</span></a>		<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-1290"></a><br />
+			<span class="comment-aux">
+				2019年5月2日				<span class="comment-time">下午11:53</span>
+				
+				
+									<span class="floor">
+						<span class="floor-c floor-l"><i>5</i>F</span>											</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-1290' onclick='return addComment.moveForm( "div-comment-1290", "1290", "respond", "2590" )' aria-label='回复给Tostring'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p>博主你好，我用了方法之后网页有一个地方出现404错误，请问怎样排除某个目录。</p>
+			</div>
+	<ul class="children">
+
+	<li class="comments-anchor"><ul id="anchor-comment-1291"></ul></li>
+	<li class="comment byuser bypostauthor even depth-2 ms bk da" id="comment-1291" data-aos=fade-up>
+			<div id="div-comment-1291" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='大鸟' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='https://www.daniao.org/wp-content/uploads/avatar/e1a50789ccaf0418c30417205c17c7a196.png' class='avatar avatar-96 photo' height='96' width='96' />							</div>
+		
+		<strong>大鸟</strong>
+		<span class="author-mark post-author"><i class="be be-personoutline" title="作者"></i></span>				<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-1291"></a><br />
+			<span class="comment-aux">
+				2019年5月3日				<span class="comment-time">上午6:34</span>
+				
+				
+									<span class="floor">
+												<span class="floor-c floor-l floor-l-b">B1</span>					</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-1291' onclick='return addComment.moveForm( "div-comment-1291", "1291", "respond", "2590" )' aria-label='回复给大鸟'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p><span class="at">@ <a href="index.html#comment-1290">Tostring</a></span> 刷新缓存了没有，可以加我微信或者QQ!</p>
+			</div>
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li class="comments-anchor"><ul id="anchor-comment-1420"></ul></li>
+	<li class="comment odd alt thread-odd thread-alt depth-1 parent ms bk da" id="comment-1420" data-aos=fade-up>
+			<div id="div-comment-1420" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='dddaaannniao' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='' class='avatar avatar-96 photo letter' height='96' width='96' />							</div>
+		
+		<strong>dddaaannniao</strong>
+				<a class="vip vip2" title="评论达人 VIP.2"><i class="be be-favorite"></i><span class="lv">2</span></a>		<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-1420"></a><br />
+			<span class="comment-aux">
+				2019年5月17日				<span class="comment-time">上午11:21</span>
+				
+				
+									<span class="floor">
+						<span class="floor-c floor-l"><i>6</i>F</span>											</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-1420' onclick='return addComment.moveForm( "div-comment-1420", "1420", "respond", "2590" )' aria-label='回复给dddaaannniao'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p>张戈说： 当网站首选域名是顶级域名的时候，主站的 cookies 将写到所有的二级域名。<br />
+https://zhang.ge/5047.html<br />
+这样的话，博主把静态资源放到res.daniao.org二级域名 还是会有cookies污染的</p>
+			</div>
+	<ul class="children">
+
+	<li class="comments-anchor"><ul id="anchor-comment-1422"></ul></li>
+	<li class="comment byuser bypostauthor even depth-2 ms bk da" id="comment-1422" data-aos=fade-up>
+			<div id="div-comment-1422" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='大鸟' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='https://www.daniao.org/wp-content/uploads/avatar/4300d99c5105ba50757d2f89ec6c5c2a96.png' class='avatar avatar-96 photo' height='96' width='96' />							</div>
+		
+		<strong>大鸟</strong>
+		<span class="author-mark author-admin"><i class="be be-personoutline" title="管理员"></i></span>				<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-1422"></a><br />
+			<span class="comment-aux">
+				2019年5月17日				<span class="comment-time">上午11:35</span>
+				
+				
+									<span class="floor">
+												<span class="floor-c floor-l floor-l-b">B1</span>					</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-1422' onclick='return addComment.moveForm( "div-comment-1422", "1422", "respond", "2590" )' aria-label='回复给大鸟'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p><span class="at">@ <a href="index.html#comment-1420">dddaaannniao</a></span> 这里有一个前提都是自用的小博客，你可以换成一个新的域名！</p>
+			</div>
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li class="comments-anchor"><ul id="anchor-comment-1424"></ul></li>
+	<li class="comment odd alt thread-even depth-1 parent ms bk da" id="comment-1424" data-aos=fade-up>
+			<div id="div-comment-1424" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='dddaaannniao' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='' class='avatar avatar-96 photo letter' height='96' width='96' />							</div>
+		
+		<strong>dddaaannniao</strong>
+				<a class="vip vip2" title="评论达人 VIP.2"><i class="be be-favorite"></i><span class="lv">2</span></a>		<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-1424"></a><br />
+			<span class="comment-aux">
+				2019年5月17日				<span class="comment-time">下午2:09</span>
+				
+				
+									<span class="floor">
+						<span class="floor-c floor-l"><i>7</i>F</span>											</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-1424' onclick='return addComment.moveForm( "div-comment-1424", "1424", "respond", "2590" )' aria-label='回复给dddaaannniao'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p>rewrite ^(.*)$ $scheme://www.daniao.orgt$1 permanent; # www.daniao.org 修改为实际主站域名</p>
+<p>这句话中www.daniao.orgt$1 多了个t，应该删除</p>
+			</div>
+	<ul class="children">
+
+	<li class="comments-anchor"><ul id="anchor-comment-1426"></ul></li>
+	<li class="comment byuser bypostauthor even depth-2 ms bk da" id="comment-1426" data-aos=fade-up>
+			<div id="div-comment-1426" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='大鸟' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='https://www.daniao.org/wp-content/uploads/avatar/4300d99c5105ba50757d2f89ec6c5c2a96.png' class='avatar avatar-96 photo' height='96' width='96' />							</div>
+		
+		<strong>大鸟</strong>
+		<span class="author-mark author-admin"><i class="be be-personoutline" title="管理员"></i></span>				<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-1426"></a><br />
+			<span class="comment-aux">
+				2019年5月17日				<span class="comment-time">下午3:02</span>
+				
+				
+									<span class="floor">
+												<span class="floor-c floor-l floor-l-b">B1</span>					</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-1426' onclick='return addComment.moveForm( "div-comment-1426", "1426", "respond", "2590" )' aria-label='回复给大鸟'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p><span class="at">@ <a href="index.html#comment-1424">dddaaannniao</a></span> 感谢，已经修改！</p>
+			</div>
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li class="comments-anchor"><ul id="anchor-comment-2696"></ul></li>
+	<li class="comment odd alt thread-odd thread-alt depth-1 ms bk da" id="comment-2696" data-aos=fade-up>
+			<div id="div-comment-2696" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='760612386' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='' class='avatar avatar-96 photo letter' height='96' width='96' />							</div>
+		
+		<strong>760612386</strong>
+				<a class="vip vip0" title="评论达人 VIP.0"><i class="be be-favoriteoutline"></i><span class="lv">0</span></a>		<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-2696"></a><br />
+			<span class="comment-aux">
+				2019年8月30日				<span class="comment-time">上午2:11</span>
+				
+				
+									<span class="floor">
+						<span class="floor-c floor-l"><i>8</i>F</span>											</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-2696' onclick='return addComment.moveForm( "div-comment-2696", "2696", "respond", "2590" )' aria-label='回复给760612386'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p>你好，请问如果主站开启htps，那么二级域名是不是也要，我刚二级域名没开，主站不加载css</p>
+			</div>
+	</li><!-- #comment-## -->
+
+	<li class="comments-anchor"><ul id="anchor-comment-4859"></ul></li>
+	<li class="comment even thread-even depth-1 parent ms bk da" id="comment-4859" data-aos=fade-up>
+			<div id="div-comment-4859" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='沙漠' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='' class='avatar avatar-96 photo letter' height='96' width='96' />							</div>
+		
+		<strong>沙漠</strong>
+				<a class="vip vip2" title="评论达人 VIP.2"><i class="be be-favorite"></i><span class="lv">2</span></a>		<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-4859"></a><br />
+			<span class="comment-aux">
+				2019年12月16日				<span class="comment-time">下午4:48</span>
+				
+				
+									<span class="floor">
+						<span class="floor-c floor-l"><i>9</i>F</span>											</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-4859' onclick='return addComment.moveForm( "div-comment-4859", "4859", "respond", "2590" )' aria-label='回复给沙漠'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p>大鸟，我开启后图片无法显示，请问怎么解决</p>
+			</div>
+	<ul class="children">
+
+	<li class="comments-anchor"><ul id="anchor-comment-4860"></ul></li>
+	<li class="comment byuser bypostauthor odd alt depth-2 parent ms bk da" id="comment-4860" data-aos=fade-up>
+			<div id="div-comment-4860" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='大鸟' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='https://www.daniao.org/wp-content/uploads/avatar/4300d99c5105ba50757d2f89ec6c5c2a96.png' class='avatar avatar-96 photo' height='96' width='96' />							</div>
+		
+		<strong>大鸟</strong>
+		<span class="author-mark author-admin"><i class="be be-personoutline" title="管理员"></i></span>				<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-4860"></a><br />
+			<span class="comment-aux">
+				2019年12月16日				<span class="comment-time">下午5:04</span>
+				
+				
+									<span class="floor">
+												<span class="floor-c floor-l floor-l-b">B1</span>					</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-4860' onclick='return addComment.moveForm( "div-comment-4860", "4860", "respond", "2590" )' aria-label='回复给大鸟'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p><span class="at">@ <a href="index.html#comment-4859">沙漠</a></span> 应该是有什么步骤没做对吧？</p>
+			</div>
+	<ul class="children">
+
+	<li class="comments-anchor"><ul id="anchor-comment-4861"></ul></li>
+	<li class="comment even depth-3 ms bk da" id="comment-4861" data-aos=fade-up>
+			<div id="div-comment-4861" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='沙漠' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='' class='avatar avatar-96 photo letter' height='96' width='96' />							</div>
+		
+		<strong>沙漠</strong>
+				<a class="vip vip2" title="评论达人 VIP.2"><i class="be be-favorite"></i><span class="lv">2</span></a>		<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-4861"></a><br />
+			<span class="comment-aux">
+				2019年12月16日				<span class="comment-time">下午5:29</span>
+				
+				
+									<span class="floor">
+												<span class="floor-c floor-l floor-l-b">B2</span>					</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-4861' onclick='return addComment.moveForm( "div-comment-4861", "4861", "respond", "2590" )' aria-label='回复给沙漠'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p><span class="at">@ <a href="index.html#comment-4860">大鸟</a></span> 启用之后JS和CSS都没法正常加载，所以我去掉了这两个。最主要的是图片，没启用之前加载需要一两秒，图片都只有几十KB而已，很奇怪为什么这么慢。然后启用动静分离，效果很明显，但是很多图片都无法显示，个别的却可以显示，我找不出什么原因</p>
+			</div>
+	</li><!-- #comment-## -->
+
+	<li class="comments-anchor"><ul id="anchor-comment-4862"></ul></li>
+	<li class="comment odd alt depth-3 ms bk da" id="comment-4862" data-aos=fade-up>
+			<div id="div-comment-4862" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='沙漠' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='' class='avatar avatar-96 photo letter' height='96' width='96' />							</div>
+		
+		<strong>沙漠</strong>
+				<a class="vip vip2" title="评论达人 VIP.2"><i class="be be-favorite"></i><span class="lv">2</span></a>		<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-4862"></a><br />
+			<span class="comment-aux">
+				2019年12月16日				<span class="comment-time">下午5:30</span>
+				
+				
+									<span class="floor">
+												<span class="floor-c floor-l floor-l-b">B2</span>					</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-4862' onclick='return addComment.moveForm( "div-comment-4862", "4862", "respond", "2590" )' aria-label='回复给沙漠'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p><span class="at">@ <a href="index.html#comment-4860">大鸟</a></span> 都是按照你的步骤来的，操作上应该没什么问题</p>
+			</div>
+	</li><!-- #comment-## -->
+
+	<li class="comments-anchor"><ul id="anchor-comment-4863"></ul></li>
+	<li class="comment even depth-3 parent ms bk da" id="comment-4863" data-aos=fade-up>
+			<div id="div-comment-4863" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='沙漠' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='' class='avatar avatar-96 photo letter' height='96' width='96' />							</div>
+		
+		<strong>沙漠</strong>
+				<a class="vip vip2" title="评论达人 VIP.2"><i class="be be-favorite"></i><span class="lv">2</span></a>		<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-4863"></a><br />
+			<span class="comment-aux">
+				2019年12月16日				<span class="comment-time">下午5:34</span>
+				
+				
+									<span class="floor">
+												<span class="floor-c floor-l floor-l-b">B2</span>					</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-4863' onclick='return addComment.moveForm( "div-comment-4863", "4863", "respond", "2590" )' aria-label='回复给沙漠'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p><span class="at">@ <a href="index.html#comment-4860">大鸟</a></span> 前缀WWW的话图片就正常，要是res的话就没办法显示了</p>
+			</div>
+	<ul class="children">
+
+	<li class="comments-anchor"><ul id="anchor-comment-4866"></ul></li>
+	<li class="comment byuser bypostauthor odd alt depth-4 ms bk da" id="comment-4866" data-aos=fade-up>
+			<div id="div-comment-4866" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='大鸟' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='https://www.daniao.org/wp-content/uploads/avatar/4300d99c5105ba50757d2f89ec6c5c2a96.png' class='avatar avatar-96 photo' height='96' width='96' />							</div>
+		
+		<strong>大鸟</strong>
+		<span class="author-mark author-admin"><i class="be be-personoutline" title="管理员"></i></span>				<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-4866"></a><br />
+			<span class="comment-aux">
+				2019年12月16日				<span class="comment-time">下午7:31</span>
+				
+				
+									<span class="floor">
+												<span class="floor-c floor-l floor-l-b">B3</span>					</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-4866' onclick='return addComment.moveForm( "div-comment-4866", "4866", "respond", "2590" )' aria-label='回复给大鸟'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p><span class="at">@ <a href="index.html#comment-4863">沙漠</a></span> 是那些后缀的图片不能显示，还是所有都不显示？</p>
+			</div>
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li class="comments-anchor"><ul id="anchor-comment-5180"></ul></li>
+	<li class="comment even thread-odd thread-alt depth-1 ms bk da" id="comment-5180" data-aos=fade-up>
+			<div id="div-comment-5180" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='Alan' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='' class='avatar avatar-96 photo letter' height='96' width='96' />							</div>
+		
+		<strong>Alan</strong>
+				<a class="vip vip2" title="评论达人 VIP.2"><i class="be be-favorite"></i><span class="lv">2</span></a>		<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-5180"></a><br />
+			<span class="comment-aux">
+				2020年1月1日				<span class="comment-time">下午5:17</span>
+				
+				
+									<span class="floor">
+						<span class="floor-c floor-l"><i>10</i>F</span>											</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-5180' onclick='return addComment.moveForm( "div-comment-5180", "5180", "respond", "2590" )' aria-label='回复给Alan'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p>大鸟哥您好<br />
+如果是已经SSL和https<br />
+端口是不是要用443而不是80？</p>
+<p>erver<br />
+{<br />
+    listen 80;</p>
+			</div>
+	</li><!-- #comment-## -->
+
+	<li class="comments-anchor"><ul id="anchor-comment-5186"></ul></li>
+	<li class="comment odd alt thread-even depth-1 ms bk da" id="comment-5186" data-aos=fade-up>
+			<div id="div-comment-5186" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='Alan' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='' class='avatar avatar-96 photo letter' height='96' width='96' />							</div>
+		
+		<strong>Alan</strong>
+				<a class="vip vip2" title="评论达人 VIP.2"><i class="be be-favorite"></i><span class="lv">2</span></a>		<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-5186"></a><br />
+			<span class="comment-aux">
+				2020年1月2日				<span class="comment-time">上午1:11</span>
+				
+				
+									<span class="floor">
+						<span class="floor-c floor-l"><i>11</i>F</span>											</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-5186' onclick='return addComment.moveForm( "div-comment-5186", "5186", "respond", "2590" )' aria-label='回复给Alan'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p>大鸟哥，我看到讲到增加内容部分，配置文件48到69行<br />
+location ~ .*\.(php|jsp|cgi|asp|aspx|flv|swf|xml)?$<br />
+    {<br />
+        proxy_set_header Host $host;<br />
+        proxy_set_header X-Real-IP $remote_addr;<br />
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;<br />
+        proxy_set_header REMOTE-HOST $remote_addr;<br />
+        proxy_pass https://www.daniao.org;</p>
+<p>    }</p>
+<p>    location ~ .*\.(html|htm|png|gif|jpeg|jpg|bmp|js|css)?$<br />
+    {<br />
+        proxy_set_header Host $host;<br />
+        proxy_set_header X-Real-IP $remote_addr;<br />
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;<br />
+        proxy_set_header REMOTE-HOST $remote_addr;<br />
+        proxy_pass https://www.daniao.org;</p>
+<p>这些要不要加上，我看到你增加部分哪里没写这部分要加？</p>
+			</div>
+	</li><!-- #comment-## -->
+
+	<li class="comments-anchor"><ul id="anchor-comment-5202"></ul></li>
+	<li class="comment even thread-odd thread-alt depth-1 parent ms bk da" id="comment-5202" data-aos=fade-up>
+			<div id="div-comment-5202" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='alan' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='' class='avatar avatar-96 photo letter' height='96' width='96' />							</div>
+		
+		<strong>alan</strong>
+				<a class="vip vip2" title="评论达人 VIP.2"><i class="be be-favorite"></i><span class="lv">2</span></a>		<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-5202"></a><br />
+			<span class="comment-aux">
+				2020年1月3日				<span class="comment-time">上午11:23</span>
+				
+				
+									<span class="floor">
+						<span class="floor-c floor-l"><i>12</i>F</span>											</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-5202' onclick='return addComment.moveForm( "div-comment-5202", "5202", "respond", "2590" )' aria-label='回复给alan'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p>您好，能否请教个问题，你们网站有篇文章关于添加功能的，要添加到function文件，那么请问在是修改主题目录下的function还是wp-includs目录的function文件（有两个）</p>
+			</div>
+	<ul class="children">
+
+	<li class="comments-anchor"><ul id="anchor-comment-5203"></ul></li>
+	<li class="comment byuser bypostauthor odd alt depth-2 ms bk da" id="comment-5203" data-aos=fade-up>
+			<div id="div-comment-5203" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='大鸟' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='https://www.daniao.org/wp-content/uploads/avatar/4300d99c5105ba50757d2f89ec6c5c2a96.png' class='avatar avatar-96 photo' height='96' width='96' />							</div>
+		
+		<strong>大鸟</strong>
+		<span class="author-mark author-admin"><i class="be be-personoutline" title="管理员"></i></span>				<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-5203"></a><br />
+			<span class="comment-aux">
+				2020年1月3日				<span class="comment-time">上午11:41</span>
+				
+				
+									<span class="floor">
+												<span class="floor-c floor-l floor-l-b">B1</span>					</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-5203' onclick='return addComment.moveForm( "div-comment-5203", "5203", "respond", "2590" )' aria-label='回复给大鸟'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p><span class="at">@ <a href="index.html#comment-5202">alan</a></span> 主题下面的function.php</p>
+			</div>
+	</li><!-- #comment-## -->
+</ul><!-- .children -->
+</li><!-- #comment-## -->
+
+	<li class="comments-anchor"><ul id="anchor-comment-5250"></ul></li>
+	<li class="comment even thread-even depth-1 ms bk da" id="comment-5250" data-aos=fade-up>
+			<div id="div-comment-5250" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='Alan' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='' class='avatar avatar-96 photo letter' height='96' width='96' />							</div>
+		
+		<strong>Alan</strong>
+				<a class="vip vip2" title="评论达人 VIP.2"><i class="be be-favorite"></i><span class="lv">2</span></a>		<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-5250"></a><br />
+			<span class="comment-aux">
+				2020年1月5日				<span class="comment-time">上午1:21</span>
+				
+				
+									<span class="floor">
+						<span class="floor-c floor-l"><i>13</i>F</span>											</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-5250' onclick='return addComment.moveForm( "div-comment-5250", "5250", "respond", "2590" )' aria-label='回复给Alan'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p>大鸟哥，用您的办法很牛，解决了不少问题，现在有个问题，<br />
+就是 我更新了主域名 的css文件，反代域名的css文件也更新，但系统读取的是带版本号的，然后出现了一个问题：<br />
+比如www.daniao.com/css?ver5.5的内容是新的，但image.daniao.com/css?ver5.5的还是旧的，但浏览器用的就是image.daniao.com/css?ver5.5的版本，不知道怎么同步？</p>
+			</div>
+	</li><!-- #comment-## -->
+
+	<li class="comments-anchor"><ul id="anchor-comment-5251"></ul></li>
+	<li class="comment odd alt thread-odd thread-alt depth-1 ms bk da" id="comment-5251" data-aos=fade-up>
+			<div id="div-comment-5251" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='Alan' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='' class='avatar avatar-96 photo letter' height='96' width='96' />							</div>
+		
+		<strong>Alan</strong>
+				<a class="vip vip2" title="评论达人 VIP.2"><i class="be be-favorite"></i><span class="lv">2</span></a>		<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-5251"></a><br />
+			<span class="comment-aux">
+				2020年1月5日				<span class="comment-time">上午1:52</span>
+				
+				
+									<span class="floor">
+						<span class="floor-c floor-l"><i>14</i>F</span>											</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-5251' onclick='return addComment.moveForm( "div-comment-5251", "5251", "respond", "2590" )' aria-label='回复给Alan'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p>把文件的$为*解决上面问题了<br />
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;<br />
+，用您的办法很牛，解决了不少问题，现在有个问题，<br />
+就是 我更新了主域名 的css文件，反代域名的css文件也更新，但系统读取的是带版本号的，然后出现了一个问题：<br />
+比如www.daniao.com/css?ver5.5的内容是新的，但image.daniao.com/css?ver5.5的还是旧的，但浏览器用的就是image.daniao.com/css?ver5.5的版本，不知道怎么同步？</p>
+<p>您的评论正在等待审核！</p>
+			</div>
+	</li><!-- #comment-## -->
+
+	<li class="comments-anchor"><ul id="anchor-comment-5252"></ul></li>
+	<li class="comment even thread-even depth-1 ms bk da" id="comment-5252" data-aos=fade-up>
+			<div id="div-comment-5252" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='Alan' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='' class='avatar avatar-96 photo letter' height='96' width='96' />							</div>
+		
+		<strong>Alan</strong>
+				<a class="vip vip2" title="评论达人 VIP.2"><i class="be be-favorite"></i><span class="lv">2</span></a>		<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-5252"></a><br />
+			<span class="comment-aux">
+				2020年1月5日				<span class="comment-time">上午2:21</span>
+				
+				
+									<span class="floor">
+						<span class="floor-c floor-l"><i>15</i>F</span>											</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-5252' onclick='return addComment.moveForm( "div-comment-5252", "5252", "respond", "2590" )' aria-label='回复给Alan'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p>再次测试，更换通配符* $还是不能解决</p>
+			</div>
+	</li><!-- #comment-## -->
+
+	<li class="comments-anchor"><ul id="anchor-comment-6097"></ul></li>
+	<li class="comment odd alt thread-odd thread-alt depth-1 ms bk da" id="comment-6097" data-aos=fade-up>
+			<div id="div-comment-6097" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='吃瓜网' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='https://www.daniao.org/wp-content/uploads/avatar/2de3ca835cbab53cd66c5ca43f97e6ce96.png' class='avatar avatar-96 photo' height='96' width='96' />							</div>
+		
+		<strong><a href="https://chidagua.com" rel="external nofollow" target="_blank" rel='external nofollow ugc' class='url'>吃瓜网</a></strong>
+				<a class="vip vip1" title="评论达人 VIP.1"><i class="be be-favorite"></i><span class="lv">1</span></a>		<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-6097"></a><br />
+			<span class="comment-aux">
+				2020年2月21日				<span class="comment-time">下午4:53</span>
+				
+				
+									<span class="floor">
+						<span class="floor-c floor-l"><i>16</i>F</span>											</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-6097' onclick='return addComment.moveForm( "div-comment-6097", "6097", "respond", "2590" )' aria-label='回复给吃瓜网'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p>伪静态/nginx主配置/vhost/文件已经存在全局反向代理 小白一枚，这个怎么回事啊。</p>
+			</div>
+	</li><!-- #comment-## -->
+
+	<li class="comments-anchor"><ul id="anchor-comment-13640"></ul></li>
+	<li class="comment even thread-even depth-1 ms bk da" id="comment-13640" data-aos=fade-up>
+			<div id="div-comment-13640" class="comment-body">
+		<div class="comment-author vcard">
+					<div class="comment-avatar load comment-avatar-show bk">
+									<img alt='nnnois' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='https://www.daniao.org/wp-content/uploads/avatar/40e069df74ae71713de37c68c407b85196.png' class='avatar avatar-96 photo' height='96' width='96' />							</div>
+		
+		<strong>nnnois</strong>
+				<a class="vip vip0" title="评论达人 VIP.0"><i class="be be-favoriteoutline"></i><span class="lv">0</span></a>		<span class="comment-meta commentmetadata">
+			<a href="index.html#comment-13640"></a><br />
+			<span class="comment-aux">
+				2020年8月30日				<span class="comment-time">下午10:06</span>
+				
+				
+									<span class="floor">
+						<span class="floor-c floor-l"><i>17</i>F</span>											</span>
+								<br />
+															<span class='reply'><a rel='nofollow' class='comment-reply-link' href='index.html#comment-13640' onclick='return addComment.moveForm( "div-comment-13640", "13640", "respond", "2590" )' aria-label='回复给nnnois'><i class="be be-stack"> </i>回复</a></span>												</span>
+		</span>
+	</div>
+	<div class="clear"></div>
+	<p>大鸟哥，想咨询下，站点多域名如何配置呢？现在只有一个域名调用，其他域名都没用。</p>
+			</div>
+	</li><!-- #comment-## -->
+			
+					</ol><!-- .comment-list -->
+
+		
+	</div>
+<!-- #comments -->
+			
+		</main><!-- .site-main -->
+	</div><!-- .content-area -->
+
+<div id="sidebar" class="widget-area all-sidebar">
+
+	
+			<aside id="custom_html-10" class="widget_text widget widget_custom_html ms bk" data-aos="fade-up"><div class="textwidget custom-html-widget"><div style="margin: 0 0 5px 0;">
+<a href="../go/locvps/index.html" target="_blank" rel="nofollow noopener"> <img src="../wp-content/uploads/2022/04/locvps0-1.jpg"></a>
+<div class="clear"></div>
+</div>
+<div style="margin: 0 0 5px 0;">
+<a href="../16810.html" target="_blank" rel="noopener"> <img src="../wp-content/uploads/2022/04/raksmart.jpg"></a>
+<div class="clear"></div>
+</div>
+<a href="../16098.html"> <img src="../wp-content/uploads/2022/04/akkocloud-ad.jpg"></a>
+</div><div class="clear"></div></aside><aside id="recent_comments-3" class="widget recent_comments ms bk" data-aos="fade-up"><h3 class="widget-title bkx da"><span class="title-i"><span></span><span></span><span></span><span></span></span>近期评论</h3>
+<div id="message" class="message-widget gaimg">
+			<ul>
+		
+		<li class="bkc load">
+			<a href="../13274.html#anchor-comment-33229" title="发表在：宝塔面板Nginx编译安装添加自定义模块PageSpeed" rel="external nofollow">
+									<img alt='水水水水水' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='' class='avatar avatar-96 photo letter' height='96' width='96' />								<span class="comment_author"><strong>水水水水水</strong></span>
+				学习来了 看隐藏内容			</a>
+		</li>
+
+		
+		<li class="bkc load">
+			<a href="../13274.html#anchor-comment-33228" title="发表在：宝塔面板Nginx编译安装添加自定义模块PageSpeed" rel="external nofollow">
+									<img alt='水水水水水' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='' class='avatar avatar-96 photo letter' height='96' width='96' />								<span class="comment_author"><strong>水水水水水</strong></span>
+				感谢分享 学习一下			</a>
+		</li>
+
+		
+		<li class="bkc load">
+			<a href="../8365.html#anchor-comment-33227" title="发表在：linux宝塔面板安装composer的方法" rel="external nofollow">
+									<img alt='玩户外i' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='' class='avatar avatar-96 photo letter' height='96' width='96' />								<span class="comment_author"><strong>玩户外i</strong></span>
+				666学习了			</a>
+		</li>
+
+		
+		<li class="bkc load">
+			<a href="../8365.html#anchor-comment-33226" title="发表在：linux宝塔面板安装composer的方法" rel="external nofollow">
+									<img alt='玩户外i' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='' class='avatar avatar-96 photo letter' height='96' width='96' />								<span class="comment_author"><strong>玩户外i</strong></span>
+				学到了			</a>
+		</li>
+
+		
+		<li class="bkc load">
+			<a href="../13733.html#anchor-comment-33225" title="发表在：aapanel部署微软OneDrive &#8211; 从宝塔面板移植OD插件" rel="external nofollow">
+									<img alt='Jack' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='' class='avatar avatar-96 photo letter' height='96' width='96' />								<span class="comment_author"><strong>Jack</strong></span>
+				学习来了 看隐藏内容			</a>
+		</li>
+
+		
+		<li class="bkc load">
+			<a href="../8862.html#anchor-comment-33224" title="发表在：宝塔面板搭建OLAINDEX &#8211;  简单而强大的OneDrive列表程序" rel="external nofollow">
+									<img alt='那个啥' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='https://www.daniao.org/wp-content/uploads/avatar/3fd4f1030e4bee4b50c26f5cdeb6b3fd96.png' class='avatar avatar-96 photo' height='96' width='96' />								<span class="comment_author"><strong>那个啥</strong></span>
+				看看隐藏内容是什么			</a>
+		</li>
+
+		
+		<li class="bkc load">
+			<a href="../14479.html#anchor-comment-33222" title="发表在：宝塔面板强制更新到7.4.5版本，比较另类的绕过方法" rel="external nofollow">
+									<img alt='genab' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='https://www.daniao.org/wp-content/uploads/avatar/5b2add6dc0547ece00eeb6cd687d3f1196.png' class='avatar avatar-96 photo' height='96' width='96' />								<span class="comment_author"><strong>genab</strong></span>
+				看不到信息			</a>
+		</li>
+
+		
+		<li class="bkc load">
+			<a href="../11860.html#anchor-comment-33221" title="发表在：宝塔面板安装AList &#8211; 一款aliyundrive（阿里云盘）列表程序" rel="external nofollow">
+									<img alt='wendale' src='data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=' data-original='https://www.daniao.org/wp-content/uploads/avatar/dc96c6197f6ac25226b0e6bb60c5d19a96.png' class='avatar avatar-96 photo' height='96' width='96' />								<span class="comment_author"><strong>wendale</strong></span>
+				看看哈			</a>
+		</li>
+
+			</ul>
+</div>
+
+<div class="clear"></div></aside><aside id="custom_html-7" class="widget_text widget widget_custom_html ms bk" data-aos="fade-up"><h3 class="widget-title bkx da">Contact：投稿、广告投放等</h3><div class="textwidget custom-html-widget">Email：285256218(at)qq.com
+<br>
+QQ群：661988897
+
+
+
+</div><div class="clear"></div></aside>	
+	</div>
+
+<div class="clear"></div>	</div>
+	<div class="clear"></div>
+					<div id="footer-widget-box" class="footer-site-widget">
+			<div class="footer-widget bgt">
+			<aside id="cx_tag_cloud-6" class="widget cx_tag_cloud" data-aos="fade-up"><h3 class="widget-title bkx da"><span class="s-icon"></span><span class="title-i"><span></span><span></span><span></span><span></span></span>建站VPS</h3>					<div class="tagcloud">
+		<a href="../tag/linode/index.html" class="tag-cloud-link tag-link-115 tag-link-position-1" style="font-size: 16.904761904762px;" aria-label="linode (28个项目)">linode</a>
+<a href="../tag/hostdare/index.html" class="tag-cloud-link tag-link-125 tag-link-position-2" style="font-size: 15.238095238095px;" aria-label="HostDare (12个项目)">HostDare</a>
+<a href="../tag/henghost/index.html" class="tag-cloud-link tag-link-3175 tag-link-position-3" style="font-size: 15.952380952381px;" aria-label="henghost (17个项目)">henghost</a>
+<a href="../tag/gigsgigscloud/index.html" class="tag-cloud-link tag-link-113 tag-link-position-4" style="font-size: 16.142857142857px;" aria-label="GigsGigsCloud (19个项目)">GigsGigsCloud</a>
+<a href="../tag/spartanhost/index.html" class="tag-cloud-link tag-link-3460 tag-link-position-5" style="font-size: 14.238095238095px;" aria-label="spartanhost (7个项目)">spartanhost</a>
+<a href="../tag/zji/index.html" class="tag-cloud-link tag-link-3936 tag-link-position-6" style="font-size: 15.666666666667px;" aria-label="zji (15个项目)">zji</a>
+<a href="../tag/ion/index.html" class="tag-cloud-link tag-link-1906 tag-link-position-7" style="font-size: 17.52380952381px;" aria-label="iON (38个项目)">iON</a>
+<a href="../tag/搬瓦工/index.html" class="tag-cloud-link tag-link-89 tag-link-position-8" style="font-size: 18px;" aria-label="搬瓦工 (48个项目)">搬瓦工</a>
+<a href="../tag/justg/index.html" class="tag-cloud-link tag-link-3420 tag-link-position-9" style="font-size: 14.714285714286px;" aria-label="justg (9个项目)">justg</a>
+<a href="../tag/digitalocean/index.html" class="tag-cloud-link tag-link-583 tag-link-position-10" style="font-size: 14px;" aria-label="DigitalOcean (6个项目)">DigitalOcean</a>
+<a href="../tag/hostwinds/index.html" class="tag-cloud-link tag-link-1672 tag-link-position-11" style="font-size: 14.714285714286px;" aria-label="Hostwinds (9个项目)">Hostwinds</a>
+<a href="../tag/傲游主机/index.html" class="tag-cloud-link tag-link-24 tag-link-position-12" style="font-size: 16.904761904762px;" aria-label="傲游主机 (28个项目)">傲游主机</a>
+<a href="../tag/locvps/index.html" class="tag-cloud-link tag-link-198 tag-link-position-13" style="font-size: 16.52380952381px;" aria-label="Locvps (23个项目)">Locvps</a>
+<a href="../tag/vultr/index.html" class="tag-cloud-link tag-link-32 tag-link-position-14" style="font-size: 17.666666666667px;" aria-label="vultr (41个项目)">vultr</a>
+<a href="../tag/dmit/index.html" class="tag-cloud-link tag-link-2920 tag-link-position-15" style="font-size: 17.47619047619px;" aria-label="DMIT (37个项目)">DMIT</a>	<div class="clear"></div>
+	</div>
+
+<div class="clear"></div></aside><aside id="cx_tag_cloud-7" class="widget cx_tag_cloud" data-aos="fade-up"><h3 class="widget-title bkx da"><span class="s-icon"></span><span class="title-i"><span></span><span></span><span></span><span></span></span>便宜VPS</h3>					<div class="tagcloud">
+		<a href="../tag/raksmart/index.html" class="tag-cloud-link tag-link-111 tag-link-position-1" style="font-size: 17.055118110236px;" aria-label="RAKsmart (36个项目)">RAKsmart</a>
+<a href="../tag/cloudcone/index.html" class="tag-cloud-link tag-link-823 tag-link-position-2" style="font-size: 16.929133858268px;" aria-label="CloudCone (33个项目)">CloudCone</a>
+<a href="../tag/contabo/index.html" class="tag-cloud-link tag-link-3306 tag-link-position-3" style="font-size: 16.07874015748px;" aria-label="Contabo (17个项目)">Contabo</a>
+<a href="../tag/digital-vm/index.html" class="tag-cloud-link tag-link-1093 tag-link-position-4" style="font-size: 15.385826771654px;" aria-label="Digital-vm (10个项目)">Digital-vm</a>
+<a href="../tag/anynode/index.html" class="tag-cloud-link tag-link-976 tag-link-position-5" style="font-size: 14.566929133858px;" aria-label="AnyNode (5个项目)">AnyNode</a>
+<a href="../tag/ruvds/index.html" class="tag-cloud-link tag-link-2495 tag-link-position-6" style="font-size: 14px;" aria-label="RUVDS (3个项目)">RUVDS</a>
+<a href="../tag/virmach/index.html" class="tag-cloud-link tag-link-706 tag-link-position-7" style="font-size: 15.606299212598px;" aria-label="Virmach (12个项目)">Virmach</a>
+<a href="../tag/skysilk/index.html" class="tag-cloud-link tag-link-742 tag-link-position-8" style="font-size: 14.566929133858px;" aria-label="SkySilk (5个项目)">SkySilk</a>
+<a href="../tag/buyvm/index.html" class="tag-cloud-link tag-link-923 tag-link-position-9" style="font-size: 15.732283464567px;" aria-label="BuyVM (13个项目)">BuyVM</a>
+<a href="../tag/gcorelabs/index.html" class="tag-cloud-link tag-link-2695 tag-link-position-10" style="font-size: 15.102362204724px;" aria-label="gcorelabs (8个项目)">gcorelabs</a>
+<a href="../tag/hostyun/index.html" class="tag-cloud-link tag-link-3944 tag-link-position-11" style="font-size: 16.393700787402px;" aria-label="hostyun (22个项目)">hostyun</a>
+<a href="../tag/pacificrack/index.html" class="tag-cloud-link tag-link-2020 tag-link-position-12" style="font-size: 17.181102362205px;" aria-label="PacificRack (40个项目)">PacificRack</a>
+<a href="../tag/racknerd/index.html" class="tag-cloud-link tag-link-2267 tag-link-position-13" style="font-size: 18px;" aria-label="RackNerd (73个项目)">RackNerd</a>
+<a href="../tag/akkocloud/index.html" class="tag-cloud-link tag-link-3988 tag-link-position-14" style="font-size: 15.606299212598px;" aria-label="akkocloud (12个项目)">akkocloud</a>
+<a href="../tag/justhost-ru/index.html" class="tag-cloud-link tag-link-2481 tag-link-position-15" style="font-size: 15.385826771654px;" aria-label="JustHost.ru (10个项目)">JustHost.ru</a>	<div class="clear"></div>
+	</div>
+
+<div class="clear"></div></aside><aside id="cx_tag_cloud-5" class="widget cx_tag_cloud" data-aos="fade-up"><h3 class="widget-title bkx da"><span class="s-icon"></span><span class="title-i"><span></span><span></span><span></span><span></span></span>大硬盘VPS</h3>					<div class="tagcloud">
+		<a href="../tag/buyvm/index.html" class="tag-cloud-link tag-link-923 tag-link-position-1" style="font-size: 16.575757575758px;" aria-label="BuyVM (13个项目)">BuyVM</a>
+<a href="../tag/contabo/index.html" class="tag-cloud-link tag-link-3306 tag-link-position-2" style="font-size: 16.909090909091px;" aria-label="Contabo (17个项目)">Contabo</a>
+<a href="../tag/greencloudvps/index.html" class="tag-cloud-link tag-link-3435 tag-link-position-3" style="font-size: 15.212121212121px;" aria-label="Greencloudvps (4个项目)">Greencloudvps</a>
+<a href="../tag/hosthatch/index.html" class="tag-cloud-link tag-link-3448 tag-link-position-4" style="font-size: 14.909090909091px;" aria-label="hosthatch (3个项目)">hosthatch</a>
+<a href="../tag/interserver/index.html" class="tag-cloud-link tag-link-6982 tag-link-position-5" style="font-size: 14px;" aria-label="InterServer (1个项目)">InterServer</a>
+<a href="../tag/spartanhost/index.html" class="tag-cloud-link tag-link-3460 tag-link-position-6" style="font-size: 15.818181818182px;" aria-label="spartanhost (7个项目)">spartanhost</a>
+<a href="../tag/virmach/index.html" class="tag-cloud-link tag-link-706 tag-link-position-7" style="font-size: 16.454545454545px;" aria-label="Virmach (12个项目)">Virmach</a>
+<a href="../tag/10gbiz/index.html" class="tag-cloud-link tag-link-5165 tag-link-position-8" style="font-size: 16.454545454545px;" aria-label="10gbiz (12个项目)">10gbiz</a>
+<a href="../tag/vultr/index.html" class="tag-cloud-link tag-link-32 tag-link-position-9" style="font-size: 18px;" aria-label="vultr (41个项目)">vultr</a>
+<a href="../tag/digitalocean/index.html" class="tag-cloud-link tag-link-583 tag-link-position-10" style="font-size: 15.666666666667px;" aria-label="DigitalOcean (6个项目)">DigitalOcean</a>
+<a href="../tag/linode/index.html" class="tag-cloud-link tag-link-115 tag-link-position-11" style="font-size: 17.515151515152px;" aria-label="linode (28个项目)">linode</a>
+<a href="../tag/liteservers-nl/index.html" class="tag-cloud-link tag-link-6590 tag-link-position-12" style="font-size: 14px;" aria-label="liteservers.nl (1个项目)">liteservers.nl</a>
+<a href="../tag/cloudcone/index.html" class="tag-cloud-link tag-link-823 tag-link-position-13" style="font-size: 17.727272727273px;" aria-label="CloudCone (33个项目)">CloudCone</a>
+<a href="../tag/servarica/index.html" class="tag-cloud-link tag-link-3455 tag-link-position-14" style="font-size: 15.212121212121px;" aria-label="servarica (4个项目)">servarica</a>
+<a href="../tag/alphavps/index.html" class="tag-cloud-link tag-link-3466 tag-link-position-15" style="font-size: 15.454545454545px;" aria-label="alphavps (5个项目)">alphavps</a>	<div class="clear"></div>
+	</div>
+
+<div class="clear"></div></aside>			<div class="clear"></div>
+		</div>
+		</div>
+		<footer id="colophon" class="site-footer bgt" role="contentinfo">
+		<div class="site-info">
+			<div class="site-copyright">
+				Copyright ©  大鸟博客:专注于国外VPS，独立服务器，主机测评和优惠信息分享!
+<p style="text-align: center;"><a href="../privacy-policy.html">privacy-policy</a></p>			</div>
+			<div class="add-info">
+								<div class="clear"></div>
+											</div>
+
+				</div>
+			</footer>
+		<ul id="scroll" class="bgt fds">
+	<li class="toc-scroll toc-no"><a class="toc-button fo ms"><i class="be be-sort"></i></a><div class="toc-prompt"><div class="toc-arrow">目录<i class="be be-playarrow"></i></div></div></li>
+	<li><a class="scroll-home ms fo" href="https://www.daniao.org/" rel="home"><i class="be be-home"></i></a></li>	<li><a class="scroll-h ms fo"><i class="be be-arrowup"></i></a></li>		<li><a class="scroll-b ms fo"><i class="be be-arrowdown"></i></a></li>			<ul class="night-day bgt">
+			<li><span class="night-main"><a class="m-night fo ms"><span class="m-moon"><span></span></span></a></span></li>
+			<li><a class="m-day fo ms"><i class="be be-loader"></i></a></li>
+		</ul>
+					</ul>
+				</div>
+<script type='text/javascript' id='superfish-js-after'>var fallwidth = {fall_width: 190}</script>
+<script type="text/javascript">var QaptchaJqueryPage="https://www.daniao.org/wp-content/themes/begin/inc/qaptcha.jquery.php"</script>
+<nav class="toc-box bk da fd yy"><div class="toc-ul-box"><ul class="toc-ul tocjq"></ul></div><span class="toc-zd bk dah yy"><span class="toc-close"><i class="be be-cross"></i><strong class="bgt">目录</strong></span></span></div></nav><script type='text/javascript' id='wp-postviews-cache-js-extra'>
+/* <![CDATA[ */
+var viewsCacheL10n = {"admin_ajax_url":"https:\/\/www.daniao.org\/wp-admin\/admin-ajax.php","post_id":"2590"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../wp-content/themes/begin/js/postviews-cache.js?ver=5.9.3' id='wp-postviews-cache-js'></script>
+<script type='text/javascript' id='favorite-js-before'>
+var keep = {"ajaxurl":"https:\/\/www.daniao.org\/wp-admin\/admin-ajax.php","nonce":"796c23f925","errorMessage":"\u51fa\u9519\u4e86"}; 
+</script>
+<script type='text/javascript' src='../wp-content/themes/begin/js/favorite-script.js?ver=2021%252F12%252F12' id='favorite-js'></script>
+<script type='text/javascript' src='../wp-content/themes/begin/js/superfish.js?ver=2021%252F12%252F12' id='superfish-js'></script>
+<script type='text/javascript' src='../wp-content/themes/begin/js/begin-script.js?ver=2021%252F12%252F12' id='be_script-js'></script>
+<script type='text/javascript' id='be_script-js-after'>
+var host = {"site":"https:\/\/www.daniao.org"}; var plt =  {"time":"30"}; 
+</script>
+<script type='text/javascript' src='../wp-content/themes/begin/js/ajax-content.js?ver=2021%252F12%252F12' id='ajax-content-js'></script>
+<script type='text/javascript' id='ajax-content-js-after'>
+var ajax_content = {"ajax_url":"https:\/\/www.daniao.org\/wp-admin\/admin-ajax.php"}; 
+</script>
+<script type='text/javascript' src='../wp-content/themes/begin/js/qrious.js?ver=2021%252F12%252F12' id='qrious-js-js'></script>
+<script type='text/javascript' id='qrious-js-js-after'>
+var ajaxqrurl = {"qrurl":false}; 
+</script>
+<script type='text/javascript' src='../wp-content/themes/begin/js/owl.js?ver=2021%252F12%252F12' id='owl-js'></script>
+<script type='text/javascript' id='owl-js-after'>
+var Timeout = {"owl_time":"4000"}; var gridcarousel = {"grid_carousel_f":"4"}; var flexiselitems = {"flexisel_f":"5"}; 
+</script>
+<script type='text/javascript' src='../wp-content/themes/begin/js/sticky.js?ver=2021%252F12%252F12' id='sticky-js'></script>
+<script type='text/javascript' src='../wp-content/themes/begin/js/ias.js?ver=2021%252F12%252F12' id='ias-js'></script>
+<script type='text/javascript' src='../wp-content/themes/begin/js/infinite-comment.js?ver=2021%252F12%252F12' id='infinite-comment-js'></script>
+<script type='text/javascript' src='../wp-content/themes/begin/js/letter.js?ver=2021%252F12%252F12' id='letter-js'></script>
+<script type='text/javascript' src='../wp-content/themes/begin/js/begin-tab.js?ver=2021%252F12%252F12' id='ajax_tab-js'></script>
+<script type='text/javascript' id='ajax_tab-js-after'>
+var ajax_tab = {"ajax_url":"https:\/\/www.daniao.org\/wp-admin\/admin-ajax.php"}; 
+</script>
+<script type='text/javascript' src='../wp-content/themes/begin/js/fancybox.js?ver=2021%252F12%252F12' id='fancybox-js'></script>
+<script type='text/javascript' src='../wp-includes/js/clipboard.min.js?ver=2021%252F12%252F12' id='clipboard-js-js'></script>
+<script type='text/javascript' src='../wp-content/themes/begin/js/copy-code.js?ver=2021%252F12%252F12' id='copy-code-js'></script>
+<script type='text/javascript' src='../wp-content/themes/begin/js/prettify.js?ver=2021%252F12%252F12' id='prettify-js'></script>
+<script type='text/javascript' id='social-share-js-before'>
+var beshare_opt="|https%3A%2F%2Fwww.daniao.org%2Fwp-content%2Fthemes%2Fbegin|0|https%3A%2F%2Fwww.daniao.org%2Fwp-admin%2Fadmin-ajax.php|2590";
+var zmy_beshare_donate_html='<div class="tab-navs"><div class="share-tab-nav-item item-alipay current da"><i class="cx cx-alipay"></i><span class="bgt">支付宝</span></div><div class="share-tab-nav-item item-weixin da"><i class="cx cx-weixin"></i><span class="bgt">微信</span></div></div><div class="share-tab-conts"><div class="share-tab-cont current"><div class="give-qr"><img src="../wp-content/uploads/2020/10/zhifubao-4.png" alt="支付宝二维码"></div><p>支付宝扫描二维码打赏作者</p></div><div class="share-tab-cont"><div class="give-qr"><img src="../wp-content/uploads/2020/10/wx-4.png" alt="微信二维码"></div><p>微信扫描二维码打赏作者</p></div></div>';var zmy_beshare_html='<div class="zmy-share-list" data-cover="https://www.daniao.org/wp-content/uploads/2017/04/btcn.jpg"><a class="share-logo ico-weixin bk" data-cmd="weixin" title="分享到微信" rel="external nofollow"></a><a class="share-logo ico-weibo bk" data-cmd="weibo" title="分享到微博" rel="external nofollow"></a><a class="share-logo ico-qzone bk" data-cmd="qzone" title="分享到QQ空间" rel="external nofollow"></a><a class="share-logo ico-qq bk" data-cmd="qq" title="分享到QQ" rel="external nofollow"></a>';
+</script>
+<script type='text/javascript' src='../wp-content/themes/begin/js/social-share.js?ver=2021%252F12%252F12' id='social-share-js'></script>
+<script type='text/javascript' src='../wp-content/themes/begin/js/jquery-ui.js?ver=2021%252F12%252F12' id='jquery-ui-js'></script>
+<script type='text/javascript' src='../wp-content/themes/begin/js/qaptcha.js?ver=2021%252F12%252F12' id='qaptcha-js'></script>
+<script type='text/javascript' id='comments-ajax-js-before'>
+var aqt = {"qt":"1"}; 
+</script>
+<script type='text/javascript' src='../wp-content/themes/begin/js/comments-ajax.js?ver=2021%252F12%252F12' id='comments-ajax-js'></script>
+<script type='text/javascript' src='../wp-content/plugins/wp-instant-links/js/instantpage.js?ver=5.9.3' id='wp-instant-links.js-js'></script>
+</body>
+</html>
