@@ -5,3 +5,5 @@ And although the application ID looks like a traditional Java package name, the 
 It must have at least two segments (one or more dots).<br>
 Each segment must start with a letter.<br>
 All characters must be alphanumeric or an underscore [a-zA-Z0-9_].
+
+This project is tested with BrowserStack
