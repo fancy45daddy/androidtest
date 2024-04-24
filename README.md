@@ -1,3 +1,5 @@
+This is an app to produce cartoon picture with ai
+
 https://developer.android.com/studio/build/application-id<br>
 And although the application ID looks like a traditional Java package name, the naming rules for the application ID are a bit more restrictive:<br>
 It must have at least two segments (one or more dots).<br>
