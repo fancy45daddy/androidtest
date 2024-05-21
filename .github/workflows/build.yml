@@ -18,7 +18,7 @@ jobs:
         - uses: actions/checkout@main
         - uses: actions/setup-java@main
           with:
-              java-version: 17.x
+              java-version: 21.x
               distribution: zulu
         - run: |
               keytool -genkey -keystore release.jks -keyalg RSA -keysize 2048 -validity 10000 -storepass 123456 -alias release -dname 'CN=(名字与姓氏), OU=(组织单位名称), O=(组织名称), L=(城市或区域名称), ST=(州或省份名称), C=(单位的两字母国家代码)'
