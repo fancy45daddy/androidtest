@@ -11,6 +11,7 @@ public class MainActivity extends android.app.Activity
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl("file:///android_asset/index.html");
         webView.loadUrl("javascript:javaCallJs(" + "'Message From Java'" + ")");
+        android.util.Log.v("1", "2");
         /*try
         {
             try (final var a = new java.net.URL("https://httpbin.org/ip").openConnection().getInputStream())
