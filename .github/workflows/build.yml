@@ -28,7 +28,7 @@ jobs:
               gradle --warning-mode all copyDependencies
               ls -al copyDependencies
               javac -Xlint:deprecation -cp $ANDROID_HOME/platforms/android-33/android.jar com/main/*.java
-              java -cp $ANDROID_HOME/build-tools/33.0.0/lib/d8.jar com.android.tools.r8.D8 com/main/*.class --lib $ANDROID_HOME/platforms/android-33/android.jar --release 
+              java -cp $ANDROID_HOME/build-tools/33.0.0/lib/d8.jar com.android.tools.r8.D8 com/main/*.class copyDependencies/*.jar --lib $ANDROID_HOME/platforms/android-33/android.jar --release 
               $ANDROID_HOME/build-tools/33.0.0/aapt add out.apk classes.dex assets/*
               $ANDROID_HOME/build-tools/33.0.0/zipalign 4 out.apk tmp.apk
               mv tmp.apk out.apk
