@@ -7,12 +7,13 @@ public class MainActivity extends android.app.Activity
     {
         super.onCreate(savedInstanceState);
         final var webView = new android.webkit.WebView(this);
-        super.setContentView(webView);
         try
         {
-            final var doc = org.jsoup.Jsoup.connect("https://en.wikipedia.org/").get();
-            webView.loadDataWithBaseURL(null, doc.title(), "text/html",  "utf-8", null);
+            final var document = org.jsoup.Jsoup.connect("https://rumble.com/user/chaowenguo1").get();
+            document.select('a.videostream__link.link').stream().map(_ -> _.attr("href")).forEach(_ -> android.utils.Log.v("1", _));
+            webView.loadDataWithBaseURL(null, document.title(), "text/html",  "utf-8", null);
         }
         catch (final java.lang.Exception e){}
+        super.setContentView(webView);
     }  
 }
