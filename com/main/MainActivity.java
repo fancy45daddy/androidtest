@@ -16,7 +16,7 @@ public class MainActivity extends android.app.Activity
                 final var video = new java.net.URI(rumble.select("link[type='application/json+oembed']").attr("href")).getQuery().split("/");
                 final var a = org.jsoup.Jsoup.connect(java.lang.String.join("?", "https://rumble.com/embedJS/u3", java.util.Map.ofEntries(java.util.Map.entry("request", "video"), java.util.Map.entry("ver", "2"), java.util.Map.entry("v", video[video.length - 1]), java.util.Map.entry("ext", java.net.URLEncoder.encode("{\"ad_count\":null}", java.nio.charset.StandardCharsets.UTF_8.toString())), java.util.Map.entry("ad_wt", "1")).entrySet().stream().map($ -> java.lang.String.join("=", $.getKey(), $.getValue())).collect(java.util.stream.Collectors.joining("&")))).ignoreContentType(true).get();
                 final var objectMapper = new com.fasterxml.jackson.databind.ObjectMapper();
-                android.util.Log.v("1", objectMapper.readTree(a.text()).get("data").get("a").get("ads"));
+                android.util.Log.v("1", objectMapper.writeValueAsString(objectMapper.readTree(a.text()).get("data").get("a").get("ads")));
             }
             webView.loadDataWithBaseURL(null, document.title(), "text/html",  "utf-8", null);
         }
