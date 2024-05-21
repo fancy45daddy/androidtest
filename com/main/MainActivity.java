@@ -8,6 +8,8 @@ public class MainActivity extends android.app.Activity
         super.onCreate(savedInstanceState);
         final var webView = new android.webkit.WebView(this);
         webView.loadUrl("file:///android_asset/index.html");
+        new java.lang.String(new java.net.URL("http://www.android.com").openConnection().getInputStream().readAllBytes());
+
         super.setContentView(webView);
     }  
 }
