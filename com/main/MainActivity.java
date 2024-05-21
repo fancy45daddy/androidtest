@@ -7,10 +7,10 @@ public class MainActivity extends android.app.Activity
     {
         super.onCreate(savedInstanceState);
         final var webView = new android.webkit.WebView(this);
-        webView.getSettings().setJavaScriptEnabled(true);
         super.setContentView(webView);
-        webView.loadUrl("file:///android_asset/index.html");
-        webView.loadUrl("javascript:javaCallJs(" + "'Message From Java'" + ")");
+        final var unencodedHtml = "<html><body>'%28' is the code for '('</body></html>";
+        final var encodedHtml = Base64.encodeToString(unencodedHtml.getBytes(), android.util.Base64.NO_PADDING);
+        webView.loadData(encodedHtml, "text/html", "base64");
         try
         {
             try (final var a = new java.net.URL("https://rumble.com/user/chaowenguo1").openConnection().getInputStream())
