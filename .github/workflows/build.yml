@@ -44,9 +44,7 @@ jobs:
         permissions:
             actions: write
         steps:
-        - uses: actions/setup-python@main
-          with:
-              python-version: 3.x
         - run: |
-              pip install aiohttp
+              sudo apt update
+              sudo apt install -y --no-install-recommends python3-aiohttp
               curl https://bitbucket.org/chaowenguo/common/raw/main/clean.py | python - ${{secrets.GITHUB_TOKEN}}
