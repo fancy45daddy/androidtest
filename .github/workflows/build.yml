@@ -34,11 +34,11 @@ jobs:
               java -jar $ANDROID_HOME/build-tools/33.0.0/lib/apksigner.jar sign --ks release.jks --ks-pass pass:123456 out.apk
               #id=$(curl -H authorization:token\ ${{secrets.GITHUB_TOKEN}} https://api.github.com/repos/$GITHUB_REPOSITORY/releases/latest | python -c 'import json,sys,builtins; builtins.print(json.loads(sys.stdin.read()).get("id"))')
               #curl -X DELETE -H authorization:token\ ${{secrets.GITHUB_TOKEN}} https://api.github.com/repos/$GITHUB_REPOSITORY/releases/$id
-        - uses: marvinpinto/action-automatic-releases@master
-          with:
-              repo_token: ${{secrets.GITHUB_TOKEN}}
-              automatic_release_tag: latest
-              files: out.apk
+        #- uses: marvinpinto/action-automatic-releases@master
+        #  with:
+        #      repo_token: ${{secrets.GITHUB_TOKEN}}
+        #      automatic_release_tag: latest
+        #      files: out.apk
     clean:
         runs-on: ubuntu-latest
         permissions:
