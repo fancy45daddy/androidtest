@@ -14,8 +14,8 @@ public class MainActivity extends android.app.Activity
             {
                 final var rumble = org.jsoup.Jsoup.connect(href).get();
                 final var video = new java.net.URI(rumble.select("link[type='application/json+oembed']").attr("href")).getQuery().split("/");
-                android.util.Log.v("1", java.util.Map.ofEntries(java.util.Map.entry("request", "video"), java.util.Map.entry("ver", "2"), java.util.Map.entry("v", video[video.length - 2]), java.util.Map.entry("ext", java.net.URLEncoder.encode("{\"ad_count\":null}", java.nio.charset.StandardCharsets.UTF_8.toString())), java.util.Map.entry("ad_wt", "1")).entrySet().stream().map($ -> java.lang.String.join("=", $.getKey(), $.getValue())).collect(java.util.stream.Collectors.joining("&")));
-                //const url = await axios.get('https://rumble.com/embedJS/u3', {params:{request:'video', ver:2, v:video, ext:globalThis.encodeURIComponent('{"ad_count":null}'), ad_wt:1}}).then(_ => _.data.a.ads.at(0).waterfall.at(0).url)
+                final var a = org.jsoup.Jsoup.connect(java.lang.String.join("?", "https://rumble.com/embedJS/u3", java.util.Map.ofEntries(java.util.Map.entry("request", "video"), java.util.Map.entry("ver", "2"), java.util.Map.entry("v", video[video.length - 1]), java.util.Map.entry("ext", java.net.URLEncoder.encode("{\"ad_count\":null}", java.nio.charset.StandardCharsets.UTF_8.toString())), java.util.Map.entry("ad_wt", "1")).entrySet().stream().map($ -> java.lang.String.join("=", $.getKey(), $.getValue())).collect(java.util.stream.Collectors.joining("&"))).get()
+                android.util.Log.v("1", a);
 
 
             }
