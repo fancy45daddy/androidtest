@@ -8,7 +8,11 @@ public class MainActivity extends android.app.Activity
         super.onCreate(savedInstanceState);
         final var webView = new android.webkit.WebView(this);
         super.setContentView(webView);
-        final var doc = org.jsoup.Jsoup.connect("https://en.wikipedia.org/").get();
-        webView.loadDataWithBaseURL(null, doc.title(), "text/html",  "utf-8", null);
+        try
+        {
+            final var doc = org.jsoup.Jsoup.connect("https://en.wikipedia.org/").get();
+            webView.loadDataWithBaseURL(null, doc.title(), "text/html",  "utf-8", null);
+        }
+        catch (final var java.lang.Exception e){}
     }  
 }
