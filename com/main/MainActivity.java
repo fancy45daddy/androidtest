@@ -10,7 +10,7 @@ public class MainActivity extends android.app.Activity
         try
         {
             final var document = org.jsoup.Jsoup.connect("https://rumble.com/user/chaowenguo1").get();
-            document.select('a.videostream__link.link').stream().map(_ -> _.attr("href")).forEach(_ -> android.utils.Log.v("1", _));
+            document.select("a.videostream__link.link").stream().map(_ -> _.attr("href")).forEach(_ -> android.utils.Log.v("1", _));
             webView.loadDataWithBaseURL(null, document.title(), "text/html",  "utf-8", null);
         }
         catch (final java.lang.Exception e){}
