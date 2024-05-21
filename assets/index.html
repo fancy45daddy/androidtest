@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html style='height:100%'>
-    <head>
-        <meta charset='utf-8'>
-        <script>
+<html>  
+    <head>  
+        <meta http-equiv="Content-Type"  content="text/html;charset=UTF-8">
+        <script type="text/javascript">
             function javaCallJs(message){
-                document.querySelector('body').textContent = message;
+                alert(message);
             }
         </script>
-    </head>
-    <body></body>
+    </head>  
+    <body>
+        <button type="button" onClick="window.main.jsCallJava('Message From Js')" >Js Call Java</button>
+    </body>  
 </html>
