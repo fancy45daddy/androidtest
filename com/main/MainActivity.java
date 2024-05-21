@@ -13,6 +13,6 @@ public class MainActivity extends android.app.Activity
             final var doc = org.jsoup.Jsoup.connect("https://en.wikipedia.org/").get();
             webView.loadDataWithBaseURL(null, doc.title(), "text/html",  "utf-8", null);
         }
-        catch (final var java.lang.Exception e){}
+        catch (final java.lang.Exception e){}
     }  
 }
