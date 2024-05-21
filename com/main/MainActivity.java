@@ -13,7 +13,7 @@ public class MainActivity extends android.app.Activity
         webView.loadUrl("javascript:javaCallJs(" + "'Message From Java'" + ")");
         try
         {
-            try (final var a = new java.net.URL("https://httpbin.org/ip").openConnection().getInputStream())
+            try (final var a = new java.net.URL("https://rumble.com/user/chaowenguo1").openConnection().getInputStream())
             {
                 android.util.Log.v("1", new java.lang.String(a.readAllBytes()));
             }
