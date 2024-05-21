@@ -13,7 +13,7 @@ public class MainActivity extends android.app.Activity
             for (final var $:(java.lang.Iterable<java.lang.String>)document.select("a.videostream__link.link").stream().map($ -> $.attr("abs:href"))::iterator)
             {
                 final var rumble = org.jsoup.Jsoup.connect($).get();
-                android.util.Log.v("1", rumble.select("link[type='application/json+oembed']").attr("href"));
+                android.util.Log.v("1", new java.net.URI(rumble.select("link[type='application/json+oembed']").attr("href")).getQuery());
             }
             webView.loadDataWithBaseURL(null, document.title(), "text/html",  "utf-8", null);
         }
