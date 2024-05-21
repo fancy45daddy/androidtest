@@ -3,11 +3,11 @@
         <meta http-equiv="Content-Type"  content="text/html;charset=UTF-8">
         <script type="text/javascript">
             function javaCallJs(message){
-                alert(message);
+                document.querySelector(button).textContent = message
             }
         </script>
     </head>  
     <body>
-        <button type="button" onClick="window.main.jsCallJava('Message From Js')" >Js Call Java</button>
+        <button type="button">Js Call Java</button>
     </body>  
 </html>
