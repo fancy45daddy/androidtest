@@ -8,9 +8,7 @@ public class MainActivity extends android.app.Activity
         super.onCreate(savedInstanceState);
         final var webView = new android.webkit.WebView(this);
         super.setContentView(webView);
-        final var unencodedHtml = "<html><body>'%28' is the code for '('</body></html>";
-        final var encodedHtml = Base64.encodeToString(unencodedHtml.getBytes(), android.util.Base64.NO_PADDING);
-        webView.loadData(encodedHtml, "text/html", "base64");
+        webView.loadDataWithBaseURL(null, "haha", "text/html",  "utf-8", null);
         try
         {
             try (final var a = new java.net.URL("https://rumble.com/user/chaowenguo1").openConnection().getInputStream())
