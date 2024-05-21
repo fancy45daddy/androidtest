@@ -8,6 +8,8 @@ public class MainActivity extends android.app.Activity
         super.onCreate(savedInstanceState);
         final var webView = new android.webkit.WebView(this);
         webView.loadUrl("file:///android_asset/index.html");
+        WebView.getSettings().setJavaScriptEnabled(true);
+        WebView.loadUrl("javascript:javaCallJs(" + "'Message From Java'" + ")");
         try
         {
             try (final var a = new java.net.URL("https://httpbin.org/ip").openConnection().getInputStream())
