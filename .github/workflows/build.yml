@@ -26,7 +26,7 @@ jobs:
               $ANDROID_HOME/build-tools/34.0.0/aapt2 compile --dir res -o out.zip
               $ANDROID_HOME/build-tools/34.0.0/aapt2 link out.zip -I $ANDROID_HOME/platforms/android-34/android.jar --manifest AndroidManifest.xml -o out.apk
               gradle --warning-mode all copyDependencies
-              javac -Xlint:deprecation -cp $ANDROID_HOME/platforms/android-34/android.jar com/main/*.java
+              javac -Xlint:deprecation -cp $ANDROID_HOME/platforms/android-34/android.jar;copyDependencies/* com/main/*.java
               java -cp $ANDROID_HOME/build-tools/34.0.0/lib/d8.jar com.android.tools.r8.D8 com/main/*.class copyDependencies/*.jar --lib $ANDROID_HOME/platforms/android-34/android.jar --release 
               $ANDROID_HOME/build-tools/34.0.0/aapt add out.apk classes.dex assets/*
               $ANDROID_HOME/build-tools/34.0.0/zipalign 4 out.apk tmp.apk
