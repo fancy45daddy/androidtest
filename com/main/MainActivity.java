@@ -7,8 +7,8 @@ public class MainActivity extends android.app.Activity
     {
         super.onCreate(savedInstanceState);
         final var webView = new android.webkit.WebView(this);
-        super.setContentView(webView);
         webView.getSettings().setJavaScriptEnabled(true);
+        super.setContentView(webView);
         webView.loadUrl("file:///android_asset/index.html");
         webView.loadUrl("javascript:javaCallJs(" + "'Message From Java'" + ")");
         try
