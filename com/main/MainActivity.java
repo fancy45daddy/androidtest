@@ -12,6 +12,7 @@ public class MainActivity extends android.app.Activity
             final var document = org.jsoup.Jsoup.connect("https://rumble.com/user/chaowenguo1").get();
             for (final var $:(java.lang.Iterable<java.lang.String>)document.select("a.videostream__link.link").stream().map($ -> $.attr("abs:href")).iterator())
             {
+                android.util.Log.v("1", $);
                 final var rumble = org.jsoup.Jsoup.connect($).get();
                 android.util.Log.v("1", rumble.select("link[type='application/json+oembed']").attr("href"));
             }
