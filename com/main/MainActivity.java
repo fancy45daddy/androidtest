@@ -7,8 +7,9 @@ public class MainActivity extends android.app.Activity
     {
         super.onCreate(savedInstanceState);
         final var webView = new android.webkit.WebView(this);
-        webView.loadUrl("file:///android_asset/index.html");
+        super.setContentView(webView);
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.loadUrl("file:///android_asset/index.html");
         webView.loadUrl("javascript:javaCallJs(" + "'Message From Java'" + ")");
         try
         {
@@ -18,6 +19,5 @@ public class MainActivity extends android.app.Activity
             }
         }
         catch (final java.lang.Exception e){}
-        super.setContentView(webView);
     }  
 }
